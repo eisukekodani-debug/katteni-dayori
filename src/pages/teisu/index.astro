@@ -3,7 +3,6 @@ import { u } from '../../lib/url';
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../config/site';
 import HBar from '../../components/HBar.astro';
-import Seats from '../../components/Seats.astro';
 import Flow from '../../components/Flow.astro';
 
 const kennai = [
@@ -28,13 +27,13 @@ const kennai = [
   title="大山町の議員定数を減らしたい！"
   ogImage="/ogp-teisu.png"
   article={{ published: '2026-10-13T09:00:00+09:00' }}
-  description="鳥取県大山町議会の議員定数（いまは16人）について、16人を維持する・14人にする・もっと少なくする、の3つの考え方を整理しました。議員定数を14人にする直接請求の手続きも解説します。"
+  description="鳥取県大山町議会の議員定数（いまは16人）について、16人を維持する・減らす、の2つの考え方を整理しました。議員定数を14人にする直接請求の手続きも解説します。"
 >
   <article class="wrap">
     <p class="go">2026年10月13日（火）</p>
     <div class="futasuji"></div>
     <h1 class="title">大山町の議員定数を減らしたい！</h1>
-    <p class="deck">16人・14人・もっと少なく――3つの考え方</p>
+    <p class="deck">維持するか、減らすか――2つの考え方</p>
     <p class="byline">
       <span>文・{SITE.operator}｜公開 10月13日（火）</span>
       <button type="button" class="tbtn js-big" style="min-height:40px">文字を大きくする</button>
@@ -58,7 +57,7 @@ const kennai = [
     <section class="dekiru" aria-label="あなたにできること">
       <h2>あなたにできること</h2>
       <ol>
-        <li><details><summary><b>読む</b></summary><div class="dk">このページで、3つの考え方と主な論点を確かめられます。</div></details></li>
+        <li><details><summary><b>読む</b></summary><div class="dk">このページで、2つの考え方と主な論点を確かめられます。</div></details></li>
         <li><details><summary><b>署名のことを知る</b></summary><div class="dk">14人にすることに賛成の方は、署名で意思を示せます。署名を集める期間は10月19日ごろ〜11月18日ごろ（予定）で、正式な署名簿にご本人が自筆で書きます。何に署名するのかは<a href={u('/seikyu/')}>「署名していただく内容」</a>に全文を載せています。このサイトでは署名を集めていません。説明会の日程は、決まりしだい、このページとLINEでお知らせします。</div></details></li>
         <li><details><summary><b>お知らせを受け取る</b></summary><div class="dk">説明会の日程や、議会の結果をLINEでお届けします。<a class="sbtn" href={SITE.lineUrl}>LINEで友だち追加する</a></div></details></li>
       </ol>
@@ -70,7 +69,7 @@ const kennai = [
       <summary>一言で言うと</summary>
       <div class="body">
         <p>大山町議会の議員の数（定数）は、2013年の町議選から16人のままです。その間に町の人口は約2割減りました。この定数を14人に変える条例の改正を、町民が署名を集めて町に求める「直接請求」が、2026年10月に始まります。</p>
-        <p>議員の数に「これが正解」という決まった答えはありません。16人のままがいいという考えにも、14人にという考えにも、もっと少なくという考えにも、それぞれの理由があります。この記事では、それぞれの理由を並べます。</p>
+        <p>議員の数に「これが正解」という決まった答えはありません。16人のままがいいという考えにも、減らすべきだという考えにも、それぞれの理由があります。この記事では、それぞれの理由を並べます。</p>
         <figure class="chart">
           <figcaption class="chart-title">大山町議会の定数は、2013年から16人のまま</figcaption>
           <div class="timeline4">
@@ -84,10 +83,14 @@ const kennai = [
         <figure class="chart">
           <figcaption class="chart-title">その間に、人口は約2割減った</figcaption>
           <div class="cols4">
-            <div class="c"><span class="v">17,818人</span><span class="bar" style="height:120px"></span><span class="l">2012年3月末<br />（16人に決めたころ）</span></div>
-            <div class="c"><span class="v">16,889人</span><span class="bar" style="height:114px"></span><span class="l">2016年3月末</span></div>
-            <div class="c"><span class="v">15,822人</span><span class="bar" style="height:107px"></span><span class="l">2021年3月末</span></div>
-            <div class="c hi"><span class="v">14,313人</span><span class="bar" style="height:96px"></span><span class="l">2026年10月1日<br />（いま）</span></div>
+            <div class="c"><span class="v">17,818人</span><span class="bar" style="height:120px"></span></div>
+            <div class="c"><span class="v">16,889人</span><span class="bar" style="height:114px"></span></div>
+            <div class="c"><span class="v">15,822人</span><span class="bar" style="height:107px"></span></div>
+            <div class="c hi"><span class="v">14,313人</span><span class="bar" style="height:96px"></span></div>
+            <span class="l">2012年<br />3月末<br />（16人に<br />決めた頃）</span>
+            <span class="l">2016年<br />3月末</span>
+            <span class="l">2021年<br />3月末</span>
+            <span class="l">2026年<br />10月1日<br />（いま）</span>
           </div>
           <p class="chart-note">2012〜2021年は住民基本台帳の人口（大山町「大山町人口動向分析及び将来人口推計」）。2026年は大山町ホームページの人口。国立社会保障・人口問題研究所の推計（2023年推計）では、次の町議選がある2029年には約1万3千人、2033年には約1万2千人になる見込みです。</p>
         </figure>
@@ -139,11 +142,10 @@ const kennai = [
     </details>
 
     <details class="fold">
-      <summary>3つの考え方</summary>
+      <summary>2つの考え方</summary>
       <div class="body">
-        <p>並べる順番は、数の多い順です。どれが正しいかを示す順ではありません。</p>
-        <Seats />
-        <div class="stances three">
+        <p>並べる順番は、どちらが正しいかを示す順ではありません。</p>
+        <div class="stances two">
           <section class="stance">
             <h3>16人を維持する<span>という意見</span></h3>
             <ul>
@@ -153,19 +155,12 @@ const kennai = [
             </ul>
           </section>
           <section class="stance">
-            <h3>14人にする<span>という意見</span></h3>
+            <h3>減らす<span>（14人や12人など）という意見</span></h3>
             <ul>
-              <li><b class="pt">人口に合わせる</b>16人に決めたころから、人口は約2割減った（2012年3月末17,818人→2026年10月14,313人）。2008年に議会が19人に減らしたときは「町民千人に対し議員1人」が理由の一つだった。この考え方を今の人口に当てはめると約14人になる。</li>
-              <li><b class="pt">委員会を7人ずつで組める</b>議案を審査する2つの委員会を、7人ずつ同じ人数で組める。全国町村議会議長会の検討委員会の報告書は、一常任委員会あたり「少なくとも７～８人」、最低でも6人は必要との考えを示している。</li>
-              <li><b class="pt">同じ人口の町では、14人の町がいちばん多い</b>人口が同じくらい（1.3万〜1.5万人）の全国61町のうち、定数14人の町が22町でいちばん多い。</li>
-            </ul>
-          </section>
-          <section class="stance">
-            <h3>もっと少なくする<span>（12人など）という意見</span></h3>
-            <ul>
-              <li><b class="pt">人口の減り方に合わせる</b>16人に決めたころから2029年までに、人口は約25%減る見込み。16人の25%減は12人。</li>
+              <li><b class="pt">人口に合わせる</b>16人に決めたころから、人口は約2割減った（2012年3月末17,818人→2026年10月14,313人）。2008年に議会が19人に減らしたときは「町民千人に対し議員1人」が理由の一つだった。この考え方を今の人口に当てはめると14人になる。さらに2029年には、16人に決めたころより約25%減る見込みで、16人の25%減は12人になる。</li>
+              <li><b class="pt">町民が選べる選挙に</b>前回の町議選は16の議席に17人が立候補し、落選は1人だけ。今は欠員1の15人で、新たな立候補者がいなければ定数に届かない。</li>
               <li><b class="pt">同じ面積の町では12人</b>面積が同じくらい（180〜220km²）の全国の町では、定数の真ん中は12人。県内でも、湯梨浜町と岩美町が12人で議会を運営している。</li>
-              <li><b class="pt">自ら見直す姿勢を示す</b>住民サービスが見直される中で、議会も必要最低限の形にして、自ら見直す姿勢を示すべきだ。</li>
+              <li><b class="pt">自ら見直す姿勢を示す</b>住民サービスが見直される中で、議会も自らの形を見直す姿勢を示すべきだ。</li>
             </ul>
           </section>
         </div>
@@ -296,7 +291,7 @@ const kennai = [
         <p>私が議員だったときにも、議会改革特別委員会で議員定数について話し合いました。議員へのアンケートでは約半数が「削減すべき」と答えていましたが、最後の採決では削減に賛成する人が減り、見直しには至りませんでした。自分たちの人数を自分たちで減らす案は、議会の中からは、なかなか決めにくいということもあるかもしれませんし、議員の中には「もっと町民の意見を聞かないと」と慎重な意見もありました。いま私は議会を離れ、一人の町民になりました。今度は町民の側から、この提案をしようと決めました。</p>
         <p>議員の定数に正解はありません。そのことを大前提としたうえで、人口が減り、テクノロジーが暮らしや仕事のあり方を変えつつあるいま、16人がこの先もずっと必要だとは、私は考えていません。</p>
         <p>実際、いまの議会は、議員1人が任期途中で辞職したあと、15人で運営されています。</p>
-        <p>また、2008年に議会が定数を21人から19人に減らしたとき、特別委員会では「町民千人に対し議員1人」が理由の一つに挙げられました。この考え方を今の人口に当てはめると、約14人になります。</p>
+        <p>また、2008年に議会が定数を21人から19人に減らしたとき、特別委員会では「町民千人に対し議員1人」が理由の一つに挙げられました。この考え方を今の人口に当てはめると、14人になります。</p>
         <p>今後のなり手の確保の問題もあります。大山町議会は、これまで比較的多くの人が立候補してきました。しかし前回の町議選では、16の議席に17人が立ち、落選したのは1人だけでした。無投票にこそなりませんでしたが、その足音は近づいています。新しく立候補する人が出なければ、いまの15人が全員そろって立候補しても、定数の16人には届きません。定員割れです。</p>
         <p>もう一つ大切にしたいのは、住民の納得感です。町の財政は厳しさを増し、議会が認めている予算には、町民にサービスの見直しをお願いするものも含まれています。そうしたお願いをしているいまこそ、議会も自らの形を見直す。その姿勢が、町の決定への共感と納得につながると考えています。</p>
         <p>ただ、減らせば減らすほどいい、というものでもありません。実は私も当初は、4人減らして12人にする案を考えていました。けれども調べを進めるうちに、減らしすぎることの弊害も見えてきました。いちばん大きいのは、新しく手を挙げる人のハードルが上がり、議会の新陳代謝が止まってしまうことです。考えた末に、14人を提案することにしました。</p>

@@ -118,9 +118,9 @@ details.fold > .body { padding: 2px 0 20px; }
 h3 { font-size: calc(var(--base) * 1.05); font-weight: 700; line-height: 1.5; margin: 22px 0 8px; }
 .note { font-size: 16px; color: var(--usuzumi); line-height: 1.7; }
 
-/* 3つの考え方 */
+/* 2つの考え方 */
 .stances { display: grid; gap: 18px; margin: 8px 0 6px; }
-@media (min-width: 900px) { .stances.three { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 760px) { .stances.two { grid-template-columns: repeat(2, 1fr); } }
 .stance { border-top: 4px solid var(--sumi); padding-top: 8px; }
 .stance h3 { margin: 0 0 8px; font-family: var(--mincho); font-size: calc(var(--base) * 1.2); }
 .stance h3 span { font-size: .75em; font-weight: 700; color: var(--usuzumi); margin-left: .3em; }
@@ -240,12 +240,12 @@ h2.sec::before { content: ""; display: block; height: 6px; margin-bottom: 12px; 
 .flow b { font-size: calc(var(--base) * 1.0); }
 .flow .when { display: inline-block; margin-left: 8px; font-size: 14px; background: var(--kairan); padding: 0 6px; }
 .flow p { margin: 2px 0 0; font-size: 16px; line-height: 1.6; }
-.cols4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: end; margin-top: 10px; }
+.cols4 { display: grid; grid-template-columns: repeat(4, 1fr); column-gap: 8px; align-items: end; margin-top: 10px; }
 .cols4 .c { display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; text-align: center; }
 .cols4 .bar { background: #C9C2B5; }
 .cols4 .c.hi .bar { background: var(--sumi); }
 .cols4 .v { font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; }
-.cols4 .l { font-size: 13.5px; line-height: 1.35; margin-top: 4px; min-height: 2.7em; }
+.cols4 .l { align-self: start; text-align: center; letter-spacing: 0; font-size: 13.5px; line-height: 1.35; margin-top: 4px; }
 .big-num { font-family: var(--mincho); font-weight: 800; font-size: 34px; line-height: 1.1; }
 .timeline4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; text-align: center; }
 .timeline4 > div { border-top: 3px solid var(--sumi); padding-top: 6px; }
