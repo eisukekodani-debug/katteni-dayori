@@ -248,9 +248,9 @@ h2.sec::before { content: ""; display: block; height: 6px; margin-bottom: 12px; 
 .cols4 .l { align-self: start; text-align: center; letter-spacing: 0; font-size: 13.5px; line-height: 1.35; margin-top: 4px; }
 .big-num { font-family: var(--mincho); font-weight: 800; font-size: 34px; line-height: 1.1; }
 .timeline4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; text-align: center; }
-.timeline4 > div { border-top: 3px solid var(--sumi); padding-top: 6px; }
-.timeline4 .y { font-size: 14px; color: var(--usuzumi); line-height: 1.3; }
-.timeline4 .n { font-family: var(--mincho); font-weight: 800; font-size: 30px; line-height: 1.2; }
+.timeline4 > div { border-top: 3px solid var(--sumi); padding-top: 6px; display: flex; flex-direction: column; }
+.timeline4 .y { font-size: 13.5px; letter-spacing: 0; color: var(--usuzumi); line-height: 1.3; }
+.timeline4 .n { margin-top: auto; padding-top: 4px; font-family: var(--mincho); font-weight: 800; font-size: 30px; line-height: 1.2; }
 .timeline4 .n small { font-size: 15px; }
 .cmp { width: 100%; border-collapse: collapse; font-size: 15.5px; line-height: 1.5; margin-top: 8px; }
 .cmp th, .cmp td { border-bottom: 1px solid var(--kei); padding: 8px 6px; text-align: left; vertical-align: top; }
