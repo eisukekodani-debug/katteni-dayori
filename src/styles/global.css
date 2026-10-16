@@ -376,3 +376,13 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .howto .way .venue{font-size:calc(var(--base) * 1.05);margin:8px 0}
 .howto .btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
 .howto .btns .pbtn{margin:0}
+
+/* トップ冒頭：定数 16→14 */
+.heronums{background:var(--kiri);border-top:3px solid var(--sumi);padding:14px 10px 12px;margin:4px 0 14px;text-align:center}
+.heronums .lbl{font-family:var(--mincho);font-weight:800;font-size:calc(var(--base) * 1.25);margin:0 0 4px}
+.heronums .row{display:flex;align-items:center;justify-content:center;gap:14px;margin:0;font-family:var(--mincho);font-weight:800}
+.heronums .n{display:block;font-size:64px;line-height:1}
+.heronums .n small{font-size:24px;margin-left:2px}
+.heronums .arrow{font-size:32px;color:var(--usuzumi)}
+.heronums .cap{display:block;font:700 14px/1.3 var(--gothic);color:var(--usuzumi);margin-top:6px}
+@media (max-width:420px){.heronums .n{font-size:54px}.heronums .lbl{font-size:calc(var(--base) * 1.15)}}
