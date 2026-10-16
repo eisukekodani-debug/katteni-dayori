@@ -368,3 +368,9 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .hscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .hscroll table.wide{min-width:640px}
 .hscroll table.wide th,.hscroll table.wide td{white-space:nowrap}
+
+/* 署名のしかた */
+.howto .way{border:2px solid var(--sumi);padding:12px 14px;margin:12px 0}
+.howto .way h3{margin:0 0 6px;font-family:var(--mincho);font-size:calc(var(--base) * 1.15)}
+.howto .way .no{display:inline-block;width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--sumi);color:#fff;font-size:.85em;margin-right:.4em}
+.howto .way .venue{font-size:calc(var(--base) * 1.05);margin:8px 0}
