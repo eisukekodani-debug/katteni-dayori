@@ -11,7 +11,7 @@ interface Props {
   article?: { published: string; modified?: string };
   hideSubtitle?: boolean;
 }
-const { title, description = SITE.description, noindex = false, ogImage = '/ogp.png', article, hideSubtitle = false } = Astro.props;
+const { title, description = SITE.description, noindex = false, ogImage = '/ogp-20261017.png', article, hideSubtitle = false } = Astro.props;
 // 公開日まで検索よけ（PUBLIC_NOINDEX=0 で外す）
 const globalNoindex = (import.meta.env.PUBLIC_NOINDEX ?? '1') !== '0';
 const ogImageUrl = new URL(u(ogImage), Astro.site).toString();
