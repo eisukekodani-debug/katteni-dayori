@@ -15,6 +15,10 @@ import Base from '../layouts/Base.astro';
 
     <h2 class="sec">みんなの意見カード</h2>
     <p class="note">インタビューに答えて、公開に同意してくださった方の意見カードです。運営者が確かめてから載せています。</p>
+    <figure class="mihon">
+      <figcaption><b>カードの見本</b>　答え終わると、こんな「意見カード」ができます（「定数太郎」さんは架空の方です）。</figcaption>
+      <div id="mihon-card"></div>
+    </figure>
     <div id="cards" class="ai-cards"><p class="note">読み込んでいます…</p></div>
     <p class="note" style="margin-top:20px"><a href={u('/interview/privacy/')}>回答の取り扱いについて</a></p>
     <p class="note" style="margin-top:20px">このAIインタビューは、チームみらいが行っているAIインタビューの取り組みを参考にさせていただき、つくりました。なお、運営者の小谷英介はチームみらいの党員ではなく、この取り組みは特定の政党とは関係がありません。</p>
@@ -25,6 +29,9 @@ import Base from '../layouts/Base.astro';
   .ai-chui { background: var(--kairan); padding: 14px 16px; margin: 16px 0 20px; }
   .ai-chui b { display: block; }
   .ai-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .mihon { margin: 8px 0 20px; padding: 12px; border: 2px dashed var(--kei); }
+  .mihon figcaption { font-size: 15px; margin-bottom: 8px; }
+  .mihon #mihon-card img { display: block; width: 100%; max-width: 320px; height: auto; border: 1px solid var(--kei); }
   .ai-cards img { display: block; width: 100%; height: auto; border: 1px solid var(--kei); }
 </style>
 
@@ -37,6 +44,11 @@ import Base from '../layouts/Base.astro';
     box.textContent = '';
     var p = document.createElement('p'); p.className = 'note'; p.textContent = text; box.appendChild(p);
   }
+  // 見本のカード（架空の方の例。実際の意見とは分けて表示する）
+  var mihon = document.getElementById('mihon-card');
+  drawCard(['議会で何が話し合われているのか、もっと知りたい', '議員と気軽に話せる場が、地域にあるといい', '定数は、町の将来の姿とあわせて考えてほしい'], '定数太郎', 'm').then(function (url) {
+    var img = new Image(); img.src = url; img.alt = '見本：定数太郎さんの意見カード'; mihon.appendChild(img);
+  });
   fetch(API_URL + '?action=cards').then(function (r) { return r.json(); }).then(function (d) {
     var cards = (d && d.cards) || [];
     if (!cards.length) { note('まだ載っている意見カードはありません。'); return; }
