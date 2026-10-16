@@ -374,3 +374,5 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .howto .way h3{margin:0 0 6px;font-family:var(--mincho);font-size:calc(var(--base) * 1.15)}
 .howto .way .no{display:inline-block;width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--sumi);color:#fff;font-size:.85em;margin-right:.4em}
 .howto .way .venue{font-size:calc(var(--base) * 1.05);margin:8px 0}
+.howto .btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.howto .btns .pbtn{margin:0}
