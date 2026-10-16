@@ -82,7 +82,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@500;700&family=Klee+One:wght@600&display=swap" rel="stylesheet" />
+  <!-- 明朝は見出し用に1つの太さだけ読み込む。本文はスマホ・パソコンに入っている文字を使う（表示を軽くするため） -->
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@800&display=swap" rel="stylesheet" />
   {ld.map((jsonld) => <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />)}
   <script is:inline>
     try { if (localStorage.getItem('dm.big') === '1') document.documentElement.classList.add('big'); } catch (e) {}
@@ -135,13 +136,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <slot />
   </main>
 
+  <nav class="cta-bar" aria-label="署名の案内">
+    <a href={u('/#shomei')}>署名したい</a>
+    <a href={SITE.lineOaMessageUrl}>LINEで問い合わせ</a>
+  </nav>
+
   <footer class="site-footer">
     <div class="futasuji"></div>
     <div class="inner">
       <nav aria-label="フッター">
         <a href={u('/about/')}>請求代表者について</a>｜<a href={u('/contact/')}>お問い合わせ</a>｜<a href={u('/line/')}>お知らせを受け取る</a>
       </nav>
-      <p class="copy" style="font-size:12px">このサイトは、閲覧の状況を知るためにGoogleアナリティクスを使っています。個人を特定する情報は集めていません。</p>
+      <p class="copy ga">このサイトは、閲覧の状況を知るためにGoogleアナリティクスを使っています。個人を特定する情報は集めていません。</p>
       <p class="copy">© 2026 {SITE.name}</p>
     </div>
   </footer>

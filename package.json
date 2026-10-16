@@ -7,15 +7,16 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/budoux-dist.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "node scripts/check-dist.mjs",
-    "build:check": "astro build && node scripts/check-dist.mjs"
+    "build:check": "npm run build && node scripts/check-dist.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.5"
+    "astro": "^7.3.5",
+    "budoux": "^0.7.0"
   },
   "allowScripts": {
     "esbuild": true

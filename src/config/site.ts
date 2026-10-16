@@ -11,6 +11,8 @@ export const SITE = {
   contactEmail: 'kodani.policy@gmail.com',
   questionFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdUwtcUlozsJidSxWqXoo9-XFHrKQ-KYZTJ6tX3UlIIOf-UlA/viewform',
   lineUrl: 'https://line.me/R/ti/p/%40521zvpej',
+  // 公式アカウントとのトーク画面を開くリンク（問い合わせ用）
+  lineOaMessageUrl: 'https://line.me/R/oaMessage/%40521zvpej/',
   lineId: '@521zvpej',
   instagramUrl: 'https://www.instagram.com/kodani.life/',
   facebookUrl: 'https://www.facebook.com/kodani.policy/',

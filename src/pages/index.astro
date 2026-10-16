@@ -12,25 +12,49 @@ import { SITE } from '../config/site';
         <p class="row"><span><span class="n">16<small>人</small></span><span class="cap">いまの定数</span></span><span class="arrow" aria-hidden="true">→</span><span><span class="n">14<small>人</small></span><span class="cap">直接請求の案</span></span></p>
       </div>
       <p class="now"><b>署名集めが始まりました</b><br /><span class="nw">10月17日（土）〜</span><span class="nw">11月16日（月）の1か月間</span></p>
-      <p>大山町の議員の数（定数）を16人から14人に減らすことを求めて、町民の署名を集めています。「直接請求」という、法律で決められた手続きです。このサイトでは、署名から議会で話し合われるまでの流れと、提案の中身をくわしく解説します。</p>
+      <p class="herobtns"><a class="pbtn" href="#riyu">減らすべき理由を見る</a><a class="sbtn" href="#shomei">署名のしかた</a></p>
+    </section>
+
+    <section id="riyu">
+      <h2 class="sec">減らすべき理由</h2>
+      <figure class="chart">
+        <figcaption class="chart-title">人口は約2割減ったのに、定数は16人のまま</figcaption>
+        <div class="cols4">
+          <div class="c"><span class="v">17,818<small>人</small></span><span class="bar" style="height:120px"></span></div>
+          <div class="c"><span class="v">16,889<small>人</small></span><span class="bar" style="height:114px"></span></div>
+          <div class="c"><span class="v">15,822<small>人</small></span><span class="bar" style="height:107px"></span></div>
+          <div class="c hi"><span class="v">14,313<small>人</small></span><span class="bar" style="height:96px"></span></div>
+          <span class="l">2012年<br />（16人に<br />決めた頃）</span>
+          <span class="l">2016年</span>
+          <span class="l">2021年</span>
+          <span class="l">2026年<br />（いま）</span>
+        </div>
+        <p class="chart-note">大山町の住民基本台帳の人口（2012〜2021年は3月末、2026年は10月1日）</p>
+      </figure>
+      <ol class="riyu">
+        <li><b>人口に合わせると、14人</b><span>2008年に議会が定数を減らしたとき、「町民千人に議員1人」が理由の一つでした。今の人口14,313人に当てはめると、14人です。</span></li>
+        <li><b>町民が選べる選挙にしたい</b><span>前回の町議選は、16の議席に17人が立候補し、落選は1人だけでした。</span></li>
+        <li><b>県内で定数16人は、大山町と琴浦町だけ</b><span>この10年ほどで、県内の8つの町が定数を減らしています。</span></li>
+        <li><b>議会にも、あり方を見直してほしい</b><span>住民サービスの見直しが進む中、議会にも自らの形を見直す姿勢を見せてほしいと考えます。</span></li>
+      </ol>
+      <a class="sbtn" href={u('/teisu/')}>くわしく読む（維持すべきという意見も）→</a>
     </section>
 
     <section class="howto" id="shomei">
       <h2 class="sec">署名のしかた</h2>
-      <p>賛成していただける方は、次のどちらかの方法で署名できます。署名を集める期間は<b>10月17日（土）〜11月16日（月）</b>です。</p>
+      <p>賛成していただける方は、次のどちらかで署名できます。期間は<b><span class="nw">10月17日（土）</span>〜<span class="nw">11月16日（月）</span></b>です。</p>
 
       <div class="way">
         <h3><span class="no">1</span>こちらからうかがいます</h3>
-        <p>署名を希望される方は、メールかLINEでご連絡ください。請求代表者の{SITE.operator}か、代表者から委任を受けた町内の協力者が、ご自宅などへ署名をいただきにうかがいます。</p>
-        <p class="btns"><a class="pbtn" href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent('署名を希望します')}`}>メールで連絡する</a> <a class="pbtn" href={SITE.lineUrl}>LINEで連絡する</a></p>
-        <p class="note" style="margin-top:8px"><b>メール</b>：{SITE.contactEmail} あてに、お名前、ご住所（地区）、ご連絡先を書いてお送りください。<br /><b>LINE</b>：公式アカウントを友だち追加して、トークで「署名を希望します」と、お名前とご住所（地区）をお送りください。</p>
+        <p>メールかLINEでご連絡ください。代表者の{SITE.operator}か、町内の協力者が、ご自宅などへ<span class="nw">うかがいます</span>。</p>
+        <p class="btns"><a class="pbtn" href={SITE.lineOaMessageUrl}>LINEで連絡する</a> <a class="sbtn" href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent('署名を希望します')}`}>メールで連絡する</a></p>
+        <p class="note" style="margin-top:8px">お名前と、ご住所（地区）をお知らせください。メールは {SITE.contactEmail} あてです。</p>
       </div>
 
       <div class="way kairan" id="uketsuke">
         <h3><span class="no">2</span>会場で署名する</h3>
-        <p>ご自宅への訪問は控えてほしいという方も、気軽に署名していただけるよう、公民館に会場を設けます。都合のよい時間にお立ち寄りください。ご質問やご意見だけでも大丈夫です。</p>
-        <p class="venue"><b>10月25日（日）</b>　午前10時〜12時　／　午後1時〜5時<br />大山公民館（大山町末長269-1）</p>
-        <p class="note">会場の日程は、今後も追加していく予定です。決まりしだい、このページとLINEでお知らせします。</p>
+        <p class="venue"><b>10月25日（日）大山公民館</b><br />午前10時〜12時　／　午後1時〜5時<br />（大山町末長269-1）</p>
+        <p>ご自宅への訪問は控えてほしいという方も、気軽にお立ち寄りください。ご質問やご意見だけでも大丈夫です。会場の日程は、今後も追加していきます。</p>
       </div>
 
       <p class="note">署名できるのは、大山町の選挙人名簿に登録されている方（町の選挙で投票できる方）です。署名は、ご本人が正式な署名簿に自筆で書きます。このサイトやメールでは署名できません。</p>
@@ -38,39 +62,15 @@ import { SITE } from '../config/site';
 
     <h2 class="sec" id="nagare">署名から議会までの流れ</h2>
     <ol class="nagare">
-      <li><span class="who">代表者</span><b>町に申請する</b><span class="when">10月13日</span></li>
-      <li><span class="who">町</span><b>証明書を出し、告示する</b><span class="when">10月16日（金）。町が正式に知らせ（告示）、翌日から署名を集められるようになりました</span></li>
-      <li><span class="who">町民</span><b>署名を集める（1か月）</b><span class="when">10月17日（土）〜11月16日（月）　<b class="nowtag">いま、ここ</b></span><span class="hl">有権者の50分の1以上（248人以上）が必要です。ご本人が、正式な署名簿に自筆で書きます。<a href={u('/seikyu/')}>署名していただく内容（請求の要旨と条例案）</a></span></li>
-      <li><span class="who">選挙管理委員会</span><b>署名の審査と縦覧</b><span class="when">11月下旬〜12月中旬。署名簿を11月24日（火）までに提出。20日以内に署名を審査し、署名簿を7日間、誰でも見られるようにします（縦覧）</span></li>
-      <li><span class="who">代表者</span><b>町に正式に請求する（本請求）</b><span class="when">12月下旬ごろ</span></li>
-      <li class="gikai"><span class="who">町長</span><b>議会に条例案を出す</b><span class="when">請求を受けてから20日以内に議会を開き、意見を付けて条例案を出します。ここで初めて「議案」になります</span></li>
-      <li class="gikai"><span class="who">議会</span><b>本会議で採決</b><span class="when">請求の代表者が意見を述べる機会を設けたうえで、本会議で賛否を決めます（採決）</span></li>
+      <li class="done"><span class="who">代表者</span><b>町に申請する</b><span class="when">10月13日</span></li>
+      <li class="done"><span class="who">町</span><b>証明書を出し、告示する</b><span class="when">10月16日（金）</span></li>
+      <li class="now"><b class="nowtag">いま、ここ</b><span class="who">町民</span><b>署名を集める（1か月）</b><span class="when"><span class="nw">10月17日（土）</span>〜<span class="nw">11月16日（月）</span></span><span class="hl">有権者の50分の1以上（248人以上）が必要です。<a href={u('/seikyu/')}>署名していただく内容（請求の要旨と条例案）</a></span></li>
+      <li><span class="who">選挙管理委員会</span><b>署名の審査と縦覧</b><span class="when">11月下旬〜12月中旬。署名を審査し、署名簿を7日間、誰でも見られるようにします（縦覧）</span></li>
+      <li><span class="who">代表者</span><b>町に正式に請求する</b><span class="when">12月下旬ごろ</span></li>
+      <li class="gikai"><span class="who">町長</span><b>議会に条例案を出す</b><span class="when">請求を受けてから20日以内に議会を開き、条例案を出します。ここで初めて「議案」になります</span></li>
+      <li class="gikai"><span class="who">議会</span><b>本会議で採決</b><span class="when">代表者が意見を述べたうえで、議会が賛否を決めます</span></li>
     </ol>
-    <p class="note">署名を集める期間は、10月16日の町の告示で決まりました。審査から先の日付は予定です。このサイトでは署名を集めていません。出典：地方自治法第74条・第74条の2、同法施行令第91〜92条</p>
-
-    <p class="kicker">提案の中身を読む</p>
-    <a class="feature" href={u('/teisu/')}>
-      <div class="futasuji"></div>
-      <span class="stage">まだ議案ではありません</span>
-      <span class="t">大山町の議員定数を減らしたい！</span>
-      <span class="nums" aria-label="いまの定数16人、直接請求の案は14人">
-        <span><span class="n">16<small>人</small></span><span class="cap">いまの定数</span></span>
-        <span class="arrow" aria-hidden="true">→</span>
-        <span><span class="n">14<small>人</small></span><span class="cap">直接請求の案</span></span>
-      </span>
-      <p class="why">減らすべき理由</p>
-      <ul class="digest">
-        <li><b>人口は約2割減ったのに、定数は2013年から16人のまま</b>（17,818人→14,313人）。議会がかつて理由の一つにした「町民千人に議員1人」なら、14人です。</li>
-        <li><b>町民が選べる選挙にしたい</b>。前回の町議選は16の議席に17人が立候補し、落選は1人だけでした。</li>
-        <li><b>県内で定数16人は、大山町と琴浦町だけ</b>。この10年ほどで、8つの町が定数を減らしています。</li>
-        <li><b>住民サービスが見直される中、議会にもあり方を見直してほしい</b>。</li>
-      </ul>
-      <span class="readmore">詳しく読む →</span>
-    </a>
-
-
-    <h2 class="sec">このサイトについて</h2>
-    <p>議員定数を減らすことを求める署名活動について、まとめているサイトです。サイト運営者のことは<a href={u('/about/')}>請求代表者について</a>に書いています。</p>
+    <p class="note">審査から先の日付は予定です。出典：地方自治法第74条・第74条の2、同法施行令第91〜92条</p>
 
     <section class="kairan">
       <h2>LINEでお知らせを受け取る</h2>
@@ -78,5 +78,8 @@ import { SITE } from '../config/site';
       <a class="pbtn" href={SITE.lineUrl}>LINEで友だち追加する</a>
       <p style="margin:10px 0 0"><a href={u('/line/')}>QRコードとお知らせの内容</a></p>
     </section>
+
+    <h2 class="sec">このサイトについて</h2>
+    <p>議員定数を減らすことを求める署名活動について、まとめているサイトです。運営しているのは、請求代表者の{SITE.operator}です（<a href={u('/about/')}>請求代表者について</a>）。</p>
   </div>
 </Base>

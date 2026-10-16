@@ -1,5 +1,5 @@
 ---
-interface Step { t: string; d: string; when?: string }
+interface Step { t: string; d: string; when?: string; state?: 'done' | 'now' }
 interface Props { title: string; steps: Step[]; note?: string }
 const { title, steps, note } = Astro.props;
 ---
@@ -7,9 +7,9 @@ const { title, steps, note } = Astro.props;
   <figcaption class="chart-title">{title}</figcaption>
   <ol class="flow">
     {steps.map((s, i) => (
-      <li>
-        <span class="no">{i + 1}</span>
-        <div><b>{s.t}</b>{s.when && <span class="when">{s.when}</span>}<p>{s.d}</p></div>
+      <li class={s.state}>
+        <span class="no">{s.state === 'done' ? '✓' : i + 1}</span>
+        <div>{s.state === 'now' && <span class="nowtag">いま、ここ</span>}<b>{s.t}</b>{s.when && <span class="when">{s.when}</span>}<p>{s.d}</p></div>
       </li>
     ))}
   </ol>
