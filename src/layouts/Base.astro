@@ -87,6 +87,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <script is:inline>
     try { if (localStorage.getItem('dm.big') === '1') document.documentElement.classList.add('big'); } catch (e) {}
   </script>
+  <!-- アクセス解析（Googleアナリティクス GA4） -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3EM00GE2LG"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3EM00GE2LG');
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -133,6 +141,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       <nav aria-label="フッター">
         <a href={u('/about/')}>請求代表者について</a>｜<a href={u('/contact/')}>お問い合わせ</a>｜<a href={u('/line/')}>お知らせを受け取る</a>
       </nav>
+      <p class="copy" style="font-size:12px">このサイトは、閲覧の状況を知るためにGoogleアナリティクスを使っています。個人を特定する情報は集めていません。</p>
       <p class="copy">© 2026 {SITE.name}</p>
     </div>
   </footer>
