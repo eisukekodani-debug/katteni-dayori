@@ -357,3 +357,9 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .shomen p { text-indent: 1em; margin: 0 0 10px; }
 .shomen .shomen-t { text-indent: 0; font-weight: 700; text-align: center; }
 .shomen .shomen-c { text-indent: 0; text-align: center; letter-spacing: .5em; }
+
+/* 署名期間中の表示 */
+.hero .now{border:2px solid var(--sumi);padding:8px 12px;margin:0 0 12px;background:var(--men,#fff)}
+.hero .now b{font-family:var(--mincho);font-size:1.15em}
+.nagare .nowtag{display:inline-block;background:var(--sumi);color:#fff;font-size:13px;padding:0 6px;margin-left:4px;vertical-align:.1em}
+.hero .now .nw{display:inline-block;white-space:nowrap}
