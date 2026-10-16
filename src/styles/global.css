@@ -363,3 +363,8 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .hero .now b{font-family:var(--mincho);font-size:1.15em}
 .nagare .nowtag{display:inline-block;background:var(--sumi);color:#fff;font-size:13px;padding:0 6px;margin-left:4px;vertical-align:.1em}
 .hero .now .nw{display:inline-block;white-space:nowrap}
+
+/* 横に長い表：幅を保って横スクロール */
+.hscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.hscroll table.wide{min-width:640px}
+.hscroll table.wide th,.hscroll table.wide td{white-space:nowrap}
