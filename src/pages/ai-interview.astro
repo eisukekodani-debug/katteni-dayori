@@ -6,20 +6,25 @@ import Base from '../layouts/Base.astro';
   <article class="wrap">
     <div class="futasuji" style="margin-top:28px"></div>
     <h1 class="title">AIインタビュー</h1>
-    <p>署名とは別に、私たち住民の声を集めて町や議会に届ける仕組みとして、「AIインタビュー」を試験的に始めています。議会への要望などを、賛否を問わず、AIが聞き手となって会話形式で聞き取ります。AIが賛否を勧めることはなく、名前を出さずに答えられます。あなたの話に合わせて質問が進み、最後に、あなたの意見を3行の「意見カード」にまとめます。</p>
+    <p>署名とは別に、私たち住民の声を集めて町や議会に届ける仕組みとして、「AIインタビュー」を試験的に始めています。議会への要望などを、賛否を問わず、AIが聞き手となって、文字のやりとりで質問します。AIが賛否を勧めることはなく、名前を出さずに答えられます。あなたの話に合わせて質問が進み、最後に、あなたの意見を3行の「意見カード」にまとめます。</p>
     <div class="ai-chui">
       <b>これは署名ではありません。</b>
       署名ができるのは、紙の署名簿だけです。このインタビューは、署名とは別に、私たち住民の声を集めて町や議会に届けるための取り組みです。
     </div>
     <a class="pbtn" href={u('/interview/')}>インタビューに答える</a>
 
-    <h2 class="sec">みんなの意見カード</h2>
-    <p class="note">インタビューに答えて、公開に同意してくださった方の意見カードです。運営者が確かめてから載せています。</p>
+    <section class="koe" id="koe">
+      <h2>これまでに寄せられた声<span class="koe-n" id="koe-n"></span></h2>
+      <p>インタビューに答え、公開に同意してくださった方の「意見カード」です。運営者が確かめてから載せています。</p>
+      <div id="cards" class="ai-cards"><p class="note">読み込んでいます…</p></div>
+      <a class="pbtn" href={u('/interview/')}>あなたの声も聞かせてください</a>
+    </section>
+
+    <h2 class="sec">答えると、こんなカードができます</h2>
     <figure class="mihon">
-      <figcaption><b>カードの見本</b>　答え終わると、こんな「意見カード」ができます（「定数太郎」さんは架空の方です）。</figcaption>
+      <figcaption><b>カードの見本</b>　「定数太郎」さんは架空の方です。</figcaption>
       <div id="mihon-card"></div>
     </figure>
-    <div id="cards" class="ai-cards"><p class="note">読み込んでいます…</p></div>
     <p class="note" style="margin-top:20px"><a href={u('/interview/privacy/')}>回答の取り扱いについて</a></p>
     <p class="note" style="margin-top:20px">このAIインタビューは、チームみらいが行っているAIインタビューの取り組みを参考にさせていただき、つくりました。なお、運営者の小谷英介はチームみらいの党員ではなく、この取り組みは特定の政党とは関係がありません。</p>
   </article>
@@ -28,6 +33,12 @@ import Base from '../layouts/Base.astro';
 <style is:global>
   .ai-chui { background: var(--kairan); padding: 14px 16px; margin: 16px 0 20px; }
   .ai-chui b { display: block; }
+  .koe { background: var(--kairan); border-top: 4px solid var(--sumi); padding: 20px 16px 22px; margin: 28px 0 32px; }
+  .koe h2 { font-family: var(--mincho); font-size: calc(var(--base) * 1.45); line-height: 1.4; margin: 0 0 8px; }
+  .koe h2 .koe-n { display: block; width: fit-content; margin: 6px 0 0; font: 700 15px/1.7 var(--gothic); background: var(--sumi); color: #fff; padding: 0 10px; border-radius: 2px; }
+  .koe h2 .koe-n:empty { display: none; }
+  .koe > p { margin: 0 0 14px; }
+  .koe .ai-cards { margin-bottom: 18px; }
   .ai-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
   .mihon { margin: 8px 0 20px; padding: 12px; border: 2px dashed var(--kei); }
   .mihon figcaption { font-size: 15px; margin-bottom: 8px; }
@@ -52,6 +63,7 @@ import Base from '../layouts/Base.astro';
   fetch(API_URL + '?action=cards').then(function (r) { return r.json(); }).then(function (d) {
     var cards = (d && d.cards) || [];
     if (!cards.length) { note('まだ載っている意見カードはありません。'); return; }
+    document.getElementById('koe-n').textContent = cards.length + '件の声が届いています';
     box.textContent = '';
     // 1枚ずつ順番に描く
     cards.reduce(function (p, c) {
