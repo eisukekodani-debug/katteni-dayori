@@ -441,3 +441,11 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .ai-top-tag { display: inline-block; font: 700 13px/1.6 var(--gothic); background: var(--sumi); color: #fff; padding: 0 8px; margin: 0 0 6px; border-radius: 2px; }
 .ai-top .btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 0; }
 .ai-top .btns .pbtn, .ai-top .btns .sbtn { margin: 0; flex: 1 1 220px; }
+/* 私はこう考える：3つの理由の要約と、本文の見出し */
+.riyu3 { background: var(--kairan); padding: 16px 16px 14px; margin: 14px 0 12px; }
+.riyu3-h { font-family: var(--mincho); font-weight: 800; font-size: calc(var(--base) * 1.2); margin: 0 0 6px; }
+.riyu3 .riyu { margin: 0; }
+.riyu3-plus { font-size: 16px; border-top: 1px solid var(--kei); padding-top: 10px; margin: 6px 0 0; }
+.riyu-h { font-family: var(--mincho); font-size: calc(var(--base) * 1.12); line-height: 1.45; margin: 26px 0 8px; padding-left: 10px; border-left: 4px solid var(--sumi); }
+.riyu-h span { display: block; font: 700 13px/1.6 var(--gothic); color: var(--usuzumi); }
+
