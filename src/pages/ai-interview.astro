@@ -13,18 +13,23 @@ import Base from '../layouts/Base.astro';
     </div>
     <a class="pbtn" href={u('/interview/')}>インタビューに答える</a>
 
+    <h2 class="sec">答えると、こんなカードができます</h2>
+    <figure class="mihon">
+      <figcaption><b>カードの見本</b>　「定数太郎」さんは架空の方です。カードを押すと大きく表示されます。</figcaption>
+      <div id="mihon-card"></div>
+    </figure>
+
     <section class="koe" id="koe">
       <h2>これまでに寄せられた声<span class="koe-n" id="koe-n"></span></h2>
       <p>インタビューに答え、公開に同意してくださった方の「意見カード」です。運営者が確かめてから載せています。</p>
       <div id="cards" class="ai-cards"><p class="note">読み込んでいます…</p></div>
+      <p class="zoom-hint">カードを押すと、大きく表示されます。</p>
       <a class="pbtn" href={u('/interview/')}>あなたの声も聞かせてください</a>
     </section>
-
-    <h2 class="sec">答えると、こんなカードができます</h2>
-    <figure class="mihon">
-      <figcaption><b>カードの見本</b>　「定数太郎」さんは架空の方です。</figcaption>
-      <div id="mihon-card"></div>
-    </figure>
+    <dialog class="zoom" id="zoom" aria-label="意見カードの拡大表示">
+      <button type="button" class="zoom-close" id="zoom-close">閉じる ✕</button>
+      <img id="zoom-img" alt="" />
+    </dialog>
     <p class="note" style="margin-top:20px"><a href={u('/interview/privacy/')}>回答の取り扱いについて</a></p>
     <p class="note" style="margin-top:20px">このAIインタビューは、チームみらいが行っているAIインタビューの取り組みを参考にさせていただき、つくりました。なお、運営者の小谷英介はチームみらいの党員ではなく、この取り組みは特定の政党とは関係がありません。</p>
   </article>
@@ -44,6 +49,13 @@ import Base from '../layouts/Base.astro';
   .mihon figcaption { font-size: 15px; margin-bottom: 8px; }
   .mihon #mihon-card img { display: block; width: 100%; max-width: 320px; height: auto; border: 1px solid var(--kei); }
   .ai-cards img { display: block; width: 100%; height: auto; border: 1px solid var(--kei); }
+  .ai-cards img, .mihon #mihon-card img { cursor: zoom-in; }
+  .zoom-hint { font-size: 14px; color: var(--usuzumi); margin: 6px 0 0; }
+  .zoom { border: none; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; margin: 0; }
+  .zoom::backdrop { background: rgba(0, 0, 0, .82); }
+  .zoom[open] { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  .zoom img { display: block; max-width: min(94vw, 760px); max-height: 82vh; width: auto; height: auto; background: #fff; }
+  .zoom-close { font: 700 16px/1 var(--gothic); background: #fff; color: var(--sumi); border: none; border-radius: 4px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
 </style>
 
 <script is:inline src="/interview/card.js"></script>
@@ -55,10 +67,23 @@ import Base from '../layouts/Base.astro';
     box.textContent = '';
     var p = document.createElement('p'); p.className = 'note'; p.textContent = text; box.appendChild(p);
   }
+  // カードを押すと拡大表示する
+  var zoom = document.getElementById('zoom'), zimg = document.getElementById('zoom-img');
+  function openZoom(img) {
+    zimg.src = img.src; zimg.alt = img.alt;
+    if (zoom.showModal) zoom.showModal(); else window.open(img.src);
+  }
+  function makeZoomable(img) {
+    img.tabIndex = 0; img.setAttribute('role', 'button');
+    img.addEventListener('click', function () { openZoom(img); });
+    img.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openZoom(img); } });
+  }
+  document.getElementById('zoom-close').addEventListener('click', function () { zoom.close(); });
+  zoom.addEventListener('click', function (e) { if (e.target === zoom) zoom.close(); });
   // 見本のカード（架空の方の例。実際の意見とは分けて表示する）
   var mihon = document.getElementById('mihon-card');
   drawCard(['議会で何が話し合われているのか、もっと知りたい', '議員と気軽に話せる場が、地域にあるといい', '定数は、町の将来の姿とあわせて考えてほしい'], '定数太郎', 'm').then(function (url) {
-    var img = new Image(); img.src = url; img.alt = '見本：定数太郎さんの意見カード'; mihon.appendChild(img);
+    var img = new Image(); img.src = url; img.alt = '見本：定数太郎さんの意見カード'; makeZoomable(img); mihon.appendChild(img);
   });
   fetch(API_URL + '?action=cards').then(function (r) { return r.json(); }).then(function (d) {
     var cards = (d && d.cards) || [];
@@ -72,6 +97,7 @@ import Base from '../layouts/Base.astro';
           var img = new Image();
           img.src = url; img.loading = 'lazy';
           img.alt = c.nick + 'の意見：' + c.lines.join('／');
+          makeZoomable(img);
           box.appendChild(img);
         });
       });
