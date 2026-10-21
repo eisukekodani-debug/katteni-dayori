@@ -2,6 +2,17 @@
 import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config/site';
+
+// 報道（新しいものを上に足す）。リンクは期限切れや会員限定になるため載せない
+// 見出しは改行してよい区切りごとに分ける
+const HODO = [
+  { media: '山陰中央新報', date: '10月21日', title: ['議員定数削減', '直接請求へ　', '大山町民有志が', '署名活動'] },
+  { media: '読売新聞', date: '10月21日', title: ['大山町議の定数　', '削減へ', '署名活動'] },
+  { media: 'NHK', date: '10月20日', title: ['鳥取\u00a0', '大山町住民有志が', '議員定数削減を', '求めて', '署名開始'] },
+  { media: '日本海新聞', date: '10月20日', title: ['大山町民有志が', '議員定数2減', '直接請求で', '署名活動'] },
+];
+// 媒体名の並び（知られている順）
+const MEDIA = ['NHK', '読売新聞', '山陰中央新報', '日本海新聞'];
 ---
 <Base hideSubtitle>
   <div class="wrap">
@@ -13,6 +24,19 @@ import { SITE } from '../config/site';
       </div>
       <p class="now"><b>署名集めが始まりました</b><br /><span class="nw">10月17日（土）〜</span><span class="nw">11月16日（月）の1か月間</span></p>
       <p class="herobtns"><a class="pbtn" href="#riyu">減らすべき理由を見る</a><a class="sbtn" href="#shomei">署名のしかた</a></p>
+    </section>
+
+    <section class="hodo" aria-labelledby="hodo-h">
+      <h2 class="hodo-h" id="hodo-h">新聞各社とNHKが報じました</h2>
+      <p class="hodo-media">{MEDIA.map((m) => <span>{m}</span>)}</p>
+      <details class="hodo-more">
+        <summary>記事の見出しと掲載日</summary>
+        <ul class="hodo-list">
+          {HODO.map((h) => (
+            <li><span class="hodo-m">{h.media}<span class="hodo-d">{h.date}</span></span><span class="hodo-t">「{h.title.map((s) => <span class="nw">{s}</span>)}」</span></li>
+          ))}
+        </ul>
+      </details>
     </section>
 
     <section id="riyu">
