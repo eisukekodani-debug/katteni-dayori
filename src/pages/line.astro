@@ -10,7 +10,7 @@ import { SITE } from '../config/site';
     <section class="kairan">
       <h2>LINEで友だち追加</h2>
       <p>LINE公式アカウントを友だち追加すると、お知らせが届きます。</p>
-      <a class="pbtn" href={SITE.lineUrl}>LINEで友だち追加する</a>
+      <a class="linebtn" href={SITE.lineUrl} data-line="お知らせページ">LINEで友だち追加する</a>
       <div class="lineqr">
         <img src={u('/line-qr.svg')} alt="LINE友だち追加のQRコード" width="160" height="160" />
         <p>パソコンで見ている方は、スマートフォンのLINEでこのQRコードを読み取ってください。<br />LINE ID：{SITE.lineId}</p>

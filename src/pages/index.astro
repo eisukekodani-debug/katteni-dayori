@@ -34,6 +34,15 @@ const MEDIA = ['NHK', '読売新聞', '山陰中央新報', '日本海新聞'];
       <p class="herobtns"><a class="pbtn" href="#riyu">減らすべき理由を見る</a><a class="sbtn" href="#shomei">署名のしかた</a></p>
     </section>
 
+    <section class="line-hero" aria-labelledby="line-hero-h">
+      <h2 class="lh-h" id="line-hero-h">最新情報は、公式LINEでお届けします</h2>
+      <p class="lh-t">署名の会場や締め切り、議会での審議の日程と結果を、節目ごとにお知らせします。誰が登録したかは、運営者にもわかりません。</p>
+      <div class="lh-row">
+        <a class="linebtn" href={SITE.lineUrl} data-line="トップ">LINEで友だち追加する</a>
+        <div class="lh-qr"><img src={u('/line-qr.svg')} alt="LINE友だち追加のQRコード" width="96" height="96" /><span>スマートフォンで<br />読み取れます</span></div>
+      </div>
+    </section>
+
     <section class="hodo" aria-labelledby="hodo-h">
       <h2 class="hodo-h" id="hodo-h">活動がメディアで紹介されました</h2>
       <p class="hodo-media">{MEDIA.map((m) => <span>{m}</span>)}</p>
@@ -107,7 +116,7 @@ const MEDIA = ['NHK', '読売新聞', '山陰中央新報', '日本海新聞'];
     <section class="kairan">
       <h2>LINEでお知らせを受け取る</h2>
       <p>署名の受付会場や締め切り、議会の日程など、節目ごとにお知らせします。</p>
-      <a class="pbtn" href={SITE.lineUrl}>LINEで友だち追加する</a>
+      <a class="linebtn" href={SITE.lineUrl} data-line="ページ下">LINEで友だち追加する</a>
       <p style="margin:10px 0 0"><a href={u('/line/')}>QRコードとお知らせの内容</a></p>
     </section>
 

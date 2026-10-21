@@ -136,10 +136,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <slot />
   </main>
 
-  <nav class="cta-bar" aria-label="署名の案内">
-    <a href={u('/#shomei')}>署名したい</a>
-    <a href={SITE.lineOaMessageUrl}>LINEで問い合わせ</a>
+  <nav class="cta-bar" aria-label="LINE登録と署名の案内">
+    <a class="cta-line" href={SITE.lineUrl} data-line="下のバー"><b>LINEで友だち追加</b><small>署名会場や議会の日程が届きます</small></a>
+    <a class="cta-sign" href={u('/#shomei')}>署名<br />したい</a>
   </nav>
+
+  <aside class="line-float" id="lineFloat" aria-label="公式LINEのご案内">
+    <button type="button" class="lf-close" id="lfClose" aria-label="閉じる">×</button>
+    <p class="lf-h">最新情報は<br />公式LINEで</p>
+    <img src={u('/line-qr.svg')} alt="LINE友だち追加のQRコード" width="128" height="128" />
+    <p class="lf-t">スマートフォンのLINEで読み取って、友だち追加してください</p>
+    <a class="lf-a" href={SITE.lineUrl} data-line="右のQR">友だち追加のページを開く</a>
+  </aside>
 
   <footer class="site-footer">
     <div class="futasuji"></div>
@@ -179,6 +187,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
         });
       });
       label();
+      // 右下のLINE案内（パソコン）：閉じたら、この訪問中は出さない
+      var lf = document.getElementById('lineFloat');
+      try { if (sessionStorage.getItem('dm.lf') === '0') lf.hidden = true; } catch (e) {}
+      document.getElementById('lfClose').addEventListener('click', function () {
+        lf.hidden = true;
+        try { sessionStorage.setItem('dm.lf', '0'); } catch (e) {}
+      });
+      // LINEボタンが押された場所をアナリティクスに記録する
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('[data-line]');
+        if (a && window.gtag) gtag('event', 'line_add_click', { place: a.getAttribute('data-line') });
+      });
       document.querySelectorAll('.js-allopen').forEach(function (b) {
         b.addEventListener('click', function () {
           var ds = document.querySelectorAll('details.fold');
