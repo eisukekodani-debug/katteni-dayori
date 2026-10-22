@@ -510,3 +510,5 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .koshin-tag { flex-shrink: 0; display: inline-block; font: 700 12px/1.7 var(--gothic); background: var(--sumi); color: #fff; padding: 0 7px; border-radius: 2px; margin-top: 2px; }
 .koshin-line { font-size: 15px; line-height: 1.7; margin: 8px 0 4px; }
 .koshin-line .koshin-tag { margin: 0 8px 0 0; vertical-align: 1px; }
+.koshin .hoshu { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--kei); }
+.koshin .hoshu-src { margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--usuzumi); }
