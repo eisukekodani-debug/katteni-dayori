@@ -25,7 +25,7 @@ const isHome = Astro.url.pathname === u('/');
 const ld: any[] = [];
 if (isHome) {
   ld.push({
-    '@context': 'https://schema.org', '@type': 'WebSite', name: siteName,
+    '@context': 'https://schema.org', '@type': 'WebSite', name: siteName, alternateName: SITE.altNames,
     url: homeUrl, inLanguage: 'ja', description, publisher: operatorLd,
   });
 }
@@ -54,7 +54,7 @@ if (!isHome) {
 }
 const fullTitle = title
   ? `${title}｜${SITE.name}`
-  : `${SITE.name}（鳥取県大山町）｜署名から議会までの流れと提案の中身`;
+  : `${SITE.name}｜鳥取県大山町 ${SITE.campaign}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 <!doctype html>
@@ -102,13 +102,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <div class="head-row">
       {isHome ? (
         <h1 class="logo-h1"><a class="logo" href={u('/')}>
-          <span class="logo-place">{SITE.place}</span>
-          <span class="logo-row"><span class="logo-main kari">{SITE.name}</span></span>
+          <span class="logo-place">{SITE.place}　{SITE.campaign}</span>
+          <span class="logo-row"><span class="logo-katte">かってに</span><span class="logo-main">議会だより<span class="logo-now">NOW</span></span></span>
         </a></h1>
       ) : (
         <a class="logo" href={u('/')} aria-label={`${SITE.name}（トップページへ）`}>
-          <span class="logo-place">{SITE.place}</span>
-          <span class="logo-row"><span class="logo-main kari">{SITE.name}</span></span>
+          <span class="logo-place">{SITE.place}　{SITE.campaign}</span>
+          <span class="logo-row"><span class="logo-katte">かってに</span><span class="logo-main">議会だより<span class="logo-now">NOW</span></span></span>
         </a>
       )}
       <div class="head-btns">

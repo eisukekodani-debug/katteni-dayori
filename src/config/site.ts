@@ -1,6 +1,10 @@
 // サイト全体の設定。名前とURLはここを直せば全ページに反映される
 export const SITE = {
-  name: '議員定数削減の署名活動',
+  name: 'かってに議会だよりNOW',
+  // 署名期間中の活動名（ロゴの上の小さい行やタイトルに添える）
+  campaign: '議員定数削減の署名活動',
+  // 検索エンジンに伝える別名
+  altNames: ['かってに議会だより', 'katteni-dayori.com'],
   subtitle: '選挙の日じゃなくても、町は動かせる。',
   place: '鳥取県大山町',
   description:

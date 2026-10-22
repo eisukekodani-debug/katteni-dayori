@@ -45,7 +45,7 @@ function processHtml(html) {
   }
   // 1行で見せたい部分（サイト名・意図して改行させない語句）からは目印を外す
   return head + parts.join('')
-    .replace(/(<span class="(?:logo-main|logo-place|nw)[^"]*">)([\s\S]*?)(<\/span>)/g, (m, a, b, c) => a + b.replace(/<wbr>/g, '') + c);
+    .replace(/(<span class="(?:logo-main|logo-place|logo-katte|nw)[^"]*">)([\s\S]*?)(<\/span>)/g, (m, a, b, c) => a + b.replace(/<wbr>/g, '') + c);
 }
 
 let n = 0;
