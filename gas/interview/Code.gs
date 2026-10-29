@@ -367,18 +367,19 @@ function cards_() {
   return out;
 }
 
-// ニックネームが空欄・「匿名」のカードには、おまかせの名前を付ける（セッションIDから決めるので、毎回同じ名前になる）
+// ニックネームが空欄のカードには、おまかせの名前を付ける（セッションIDから決めるので、毎回同じ名前になる）。
+// 「匿名」で出した人のカードは、本人の選んだとおり「匿名」のまま表示する
 const NICKS = ['大山ブロッコリー', '白ねぎ', '二十世紀梨', '大山スイカ', '牛乳びん', '大山おこわ', '新米', '朝霧',
   '日本海の夕日', '雪どけ水', '田んぼのカエル', '海辺のカモメ', '柿の木', '菜の花', '山の湧き水', '秋の紅葉'];
 function nick_(r, used) {
   const v = String(r[10] || '').trim();
-  if (v && v.indexOf('匿名') !== 0) return v;
+  if (v) return v;
   let h = 0;
   String(r[1]).split('').forEach(function (ch) { h = (h * 31 + ch.charCodeAt(0)) % 100003; });
   let name = NICKS[h % NICKS.length];
   for (let i = 1; used[name] && i < NICKS.length; i++) name = NICKS[(h + i) % NICKS.length];
   used[name] = true;
-  return name + v.replace(/^匿名/, ''); // 「匿名（聞き取り）」は「〇〇（聞き取り）」にする
+  return name;
 }
 
 // カードの絵：古い値（男性・女性・空欄）も、新しい値（絵1〜絵10）も、card.js の番号にそろえる
