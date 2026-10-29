@@ -33,6 +33,11 @@ p{margin:0 0 12px}
 .field{display:block;margin:6px 0 4px;font-size:16px}
 .field input{display:block;width:100%;margin-top:6px;padding:10px;border:1px solid var(--waku);border-radius:4px;font:500 18px var(--gothic);color:var(--sumi);background:#fff}
 .radios{display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 4px}
+.nickbtn{margin:8px 0 0;padding:8px 12px;border:1px solid var(--waku);border-radius:4px;background:#fff;font:700 15px var(--gothic);color:var(--sumi);cursor:pointer}
+.avs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:420px;margin:6px 0 4px}
+.av{padding:3px;border:3px solid transparent;border-radius:50%;background:none;cursor:pointer;aspect-ratio:1}
+.av canvas{display:block;width:100%;height:auto;border-radius:50%}
+.av[aria-checked="true"]{border-color:var(--ai)}
 .radios label{display:flex;gap:6px;align-items:center;cursor:pointer}
 .radios input{width:22px;height:22px;margin:0;accent-color:var(--ai)}
 .check{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--kei);cursor:pointer}
@@ -113,22 +118,19 @@ textarea{width:100%;border:1px solid var(--waku);border-radius:4px;padding:10px;
 <!-- まとめの確認 -->
 <section id="s-check" hidden>
   <h1>あなたの意見を、3行にまとめました</h1>
-  <p>あなたの言葉になっているか、確かめてください。ちがうところは、自由に直してください（1行40字まで）。</p>
+  <p>あなたの言葉になっているか、確かめてください。ちがうところや、足りないところは、自由に直してください（1行60字まで）。</p>
   <div class="line3">
-    <label for="l1">1行目</label><textarea id="l1" rows="2" maxlength="40"></textarea>
-    <label for="l2">2行目</label><textarea id="l2" rows="2" maxlength="40"></textarea>
-    <label for="l3">3行目</label><textarea id="l3" rows="2" maxlength="40"></textarea>
+    <label for="l1">1行目</label><textarea id="l1" rows="3" maxlength="60"></textarea>
+    <label for="l2">2行目</label><textarea id="l2" rows="3" maxlength="60"></textarea>
+    <label for="l3">3行目</label><textarea id="l3" rows="3" maxlength="60"></textarea>
   </div>
   <h2>意見カードに載せるお名前</h2>
-  <label class="field">ニックネーム（実名でもかまいません。空欄なら「匿名」になります）
-    <input id="nick" type="text" maxlength="12" autocomplete="off" placeholder="例：だいせん太郎">
+  <label class="field">ニックネーム（実名でなくてかまいません。12字まで）
+    <input id="nick" type="text" maxlength="12" autocomplete="off" placeholder="例：大山ブロッコリー">
   </label>
-  <p class="field" style="margin-top:14px">カードの絵</p>
-  <div class="radios">
-    <label><input type="radio" name="sex" value="m">男性</label>
-    <label><input type="radio" name="sex" value="f">女性</label>
-    <label><input type="radio" name="sex" value="" checked>どちらでもない・答えない</label>
-  </div>
+  <button id="b-nick" class="nickbtn" type="button">思いつかないときは、おまかせで決める</button>
+  <p class="field" style="margin-top:14px">カードの絵（10種類から選べます）</p>
+  <div class="avs" id="avs" role="radiogroup" aria-label="カードの絵"></div>
   <p class="note">お名前と絵は、意見カードに使います。運営者に届くのは、最後に「公開してよい」を選んだときだけです。</p>
 
   <button id="b-card" class="btn" type="button">これで意見カードをつくる</button>
@@ -329,14 +331,30 @@ $('b-card').addEventListener('click', function () {
   });
 });
 
+// 空欄のままなら、おまかせのニックネームを入れて、本人に見えるようにする
 function nickValue() {
   var v = $('nick').value.replace(/\s+/g, ' ').trim();
-  return v || '匿名';
+  if (!v) { v = randomNick(); $('nick').value = v; }
+  return v;
 }
-function sexValue() {
-  var r = document.querySelector('input[name="sex"]:checked');
-  return r ? r.value : '';
-}
+$('b-nick').addEventListener('click', function () { $('nick').value = randomNick(); });
+
+// カードの絵を10種類から選ぶ
+var avChoice = '9';
+AVATAR_KEYS.forEach(function (k) {
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'av'; b.setAttribute('role', 'radio');
+  b.setAttribute('aria-label', '絵' + k); b.setAttribute('aria-checked', k === avChoice ? 'true' : 'false');
+  var c = document.createElement('canvas'); c.width = c.height = 120;
+  drawAvatar(c.getContext('2d'), 60, 60, 60, k, false);
+  b.appendChild(c);
+  b.addEventListener('click', function () {
+    avChoice = k;
+    Array.prototype.forEach.call(document.querySelectorAll('.av'), function (el) { el.setAttribute('aria-checked', el === b ? 'true' : 'false'); });
+  });
+  $('avs').appendChild(b);
+});
+function sexValue() { return avChoice; }
 
 $('b-share').addEventListener('click', function () {
   var body = lines.map(function (l) {

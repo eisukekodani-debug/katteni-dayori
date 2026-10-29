@@ -88,7 +88,8 @@ const SYSTEM_PROMPT = `あなたは、鳥取県大山町で行っている「議
 
 const SUMMARY_PROMPT = `以下は、大山町の議会についてのAIインタビューの記録です。回答者の考えを、回答者の言葉づかいを生かして3行にまとめてください。
 
-- 1行は35字以内。主語は省き、「〜と思う」「〜が大事」のように、回答者自身の言い方にします。
+- 1行は40〜60字。主語は省き、「〜と思う」「〜が大事」のように、回答者自身の言い方にします。
+- 結論だけに縮めず、回答者が挙げた理由・具体例・場面・数字をできるだけ残して、なぜそう考えるのかが伝わるようにします。2文に分けてもかまいません。
 - できれば、定数・なり手と報酬・町政への関心について1行ずつ。報酬について話していれば、その考えを必ずどこかの行に入れます。話に出なかったテーマは無理に書かず、回答者が話した別の大事な点で埋めます。
 - 回答者が言っていないことは書きません。誇張したり、言い方を強めたりしません。AIの解釈を足しません。
 - 個人がわかる情報や、特定の人の名前は入れません。`;
@@ -212,7 +213,7 @@ function submit_(body) {
   const state = load_(body.sid);
   if (!state) return { error: '時間がたったため、提出できませんでした。はじめからやり直してください。' };
 
-  const lines = (body.lines || []).slice(0, 3).map(function (s) { return clean_(s).slice(0, 60); });
+  const lines = (body.lines || []).slice(0, 3).map(function (s) { return clean_(s).slice(0, 70); });
   const sheet = sheet_();
   sheet.appendRow([
     new Date(),
@@ -223,8 +224,8 @@ function submit_(body) {
     (state.covered || []).join(','),
     body.src === 'line' ? 'LINE' : 'ウェブ',
     state.log.map(function (l) { return l.who + '：' + l.text; }).join('\n'),
-    body.publish ? (clean_(body.nick).slice(0, 12) || '匿名') : '',
-    body.publish ? ({ m: '男性', f: '女性' }[body.sex] || '') : '',
+    body.publish ? clean_(body.nick).slice(0, 12) : '',
+    body.publish ? (/^(10|[1-9])$/.test(String(body.sex)) ? '絵' + body.sex : '') : '',
     false
   ]);
   if (body.publish) sheet.getRange(sheet.getLastRow(), 13).insertCheckboxes();
@@ -350,18 +351,43 @@ function cards_() {
   const sh = sheet_();
   const n = sh.getLastRow() - 1;
   const rows = n > 0 ? sh.getRange(2, 1, n, HEADERS.length).getValues() : [];
+  const used = {};
+  rows.forEach(function (r) { used[String(r[10])] = true; });
   const out = rows
     .filter(function (r) { return r[2] === '公開してよい' && r[12] === true; })
     .map(function (r) {
       return {
         lines: [r[3], r[4], r[5]].map(String).filter(function (t) { return t; }),
-        nick: String(r[10] || '匿名'),
-        sex: r[11] === '男性' ? 'm' : r[11] === '女性' ? 'f' : ''
+        nick: nick_(r, used),
+        sex: avatar_(r[11])
       };
     })
     .reverse();
   cache.put('cards', JSON.stringify(out), 300);
   return out;
+}
+
+// ニックネームが空欄・「匿名」のカードには、おまかせの名前を付ける（セッションIDから決めるので、毎回同じ名前になる）
+const NICKS = ['大山ブロッコリー', '白ねぎ', '二十世紀梨', '大山スイカ', '牛乳びん', '大山おこわ', '新米', '朝霧',
+  '日本海の夕日', '雪どけ水', '田んぼのカエル', '海辺のカモメ', '柿の木', '菜の花', '山の湧き水', '秋の紅葉'];
+function nick_(r, used) {
+  const v = String(r[10] || '').trim();
+  if (v && v.indexOf('匿名') !== 0) return v;
+  let h = 0;
+  String(r[1]).split('').forEach(function (ch) { h = (h * 31 + ch.charCodeAt(0)) % 100003; });
+  let name = NICKS[h % NICKS.length];
+  for (let i = 1; used[name] && i < NICKS.length; i++) name = NICKS[(h + i) % NICKS.length];
+  used[name] = true;
+  return name + v.replace(/^匿名/, ''); // 「匿名（聞き取り）」は「〇〇（聞き取り）」にする
+}
+
+// カードの絵：古い値（男性・女性・空欄）も、新しい値（絵1〜絵10）も、card.js の番号にそろえる
+function avatar_(v) {
+  v = String(v || '');
+  if (v === '男性') return '1';
+  if (v === '女性') return '2';
+  const m = v.match(/^絵?(10|[1-9])$/);
+  return m ? m[1] : '9';
 }
 
 function json_(obj) {

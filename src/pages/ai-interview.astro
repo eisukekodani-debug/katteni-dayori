@@ -10,6 +10,7 @@ import Base from '../layouts/Base.astro';
     <div class="koshin">
       <span class="koshin-tag">更新</span>
       <div>
+        <p><b>10月29日</b>　意見カードを新しくしました。3行のまとめが短く、お話の中身が伝わりにくかったため、1行の字数を増やして、理由や具体例も残すようにしました。あわせて、カードの絵を10種類から選べるようにし、ニックネームを空欄にしたときは「匿名」ではなく、おまかせの名前が付くようにしました。これまでのカードも、新しい形で表示しています。</p>
         <p><b>10月22日</b>　議員の報酬についての質問を加えました。「定数だけでなく、報酬も見直すべきでは」というご意見をいただき、なり手の話とあわせて、報酬をどう考えるかも聞くようにしました。</p>
         <p class="hoshu">いまの大山町議会の議員報酬は<b>月23万5千円</b>です。6月と12月の期末手当を合わせると、議員1人あたり<b>年約379万円</b>になります。</p>
         <p class="hoshu-src">議長は月32万3千円、副議長は月24万9千円、委員長は月24万円（2024年4月改正）。期末手当は2025年度の支給率で計算。出典：大山町議会ホームページ「議員の報酬」</p>
@@ -90,7 +91,7 @@ import Base from '../layouts/Base.astro';
   zoom.addEventListener('click', function (e) { if (e.target === zoom) zoom.close(); });
   // 見本のカード（架空の方の例。実際の意見とは分けて表示する）
   var mihon = document.getElementById('mihon-card');
-  drawCard(['議会で何が話し合われているのか、もっと知りたい', '議員と気軽に話せる場が、地域にあるといい', '定数は、町の将来の姿とあわせて考えてほしい'], '定数太郎', 'm').then(function (url) {
+  drawCard(['議会で何が話し合われているのか、もっと知りたい。広報を読んでも、結論しか書いていないのでわからない', '仕事帰りに議員と気軽に話せる場が、地区の公民館にあるといい。顔を知っていれば相談もしやすい', '定数は、10年後の人口や町の姿とあわせて考えてほしい。数だけ減らしても、議会がよくなるとは限らない'], '定数太郎', '3').then(function (url) {
     var img = new Image(); img.src = url; img.alt = '見本：定数太郎さんの意見カード'; makeZoomable(img); mihon.appendChild(img);
   });
   fetch(API_URL + '?action=cards').then(function (r) { return r.json(); }).then(function (d) {
