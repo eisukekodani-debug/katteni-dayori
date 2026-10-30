@@ -104,11 +104,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
         <h1 class="logo-h1"><a class="logo" href={u('/')}>
           <span class="logo-place">{SITE.place}</span>
           <span class="logo-row"><span class="logo-main kari">{SITE.campaign}</span></span>
+          <span class="logo-site">{SITE.name}</span>
         </a></h1>
       ) : (
         <a class="logo" href={u('/')} aria-label={`${SITE.campaign}（トップページへ）`}>
           <span class="logo-place">{SITE.place}</span>
           <span class="logo-row"><span class="logo-main kari">{SITE.campaign}</span></span>
+          <span class="logo-site">{SITE.name}</span>
         </a>
       )}
       <div class="head-btns">
