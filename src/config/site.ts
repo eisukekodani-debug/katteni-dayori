@@ -4,7 +4,7 @@ export const SITE = {
   // 署名期間中の活動名（ロゴの上の小さい行やタイトルに添える）
   campaign: '議員定数削減の署名活動',
   // 検索エンジンに伝える別名
-  altNames: ['かってに議会だより', 'katteni-dayori.com'],
+  altNames: ['かってに議会だより'],
   subtitle: '選挙の日じゃなくても、町は動かせる。',
   place: '鳥取県大山町',
   description:
