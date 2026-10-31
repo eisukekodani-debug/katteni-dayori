@@ -20,7 +20,13 @@ function wrap(ctx, text, width) {
   var parts = [];
   segs.forEach(function (g) {
     var prev = parts[parts.length - 1];
-    if (prev && /^[ぁ-ゖー、。」』）！？・]/.test(g) && !/[、。]$/.test(prev)) parts[parts.length - 1] = prev + g;
+    // 「これ」「その」などは、ひらがなでも語の頭なので、その前で区切れるようにする
+    var head = /^(これ|それ|あれ|この|その|あの|こんな|そんな|こと|もの|ほか)$/.test(g);
+    // 開きかっこで行が終わらないよう、次の語とくっつける
+    if (prev && /[「『（]$/.test(prev)) parts[parts.length - 1] = prev + g;
+    // 「12人」「委員会」のように、数字や漢字のすぐ後の漢字1字は切り離さない
+    else if (prev && /^[一-龥]$/.test(g) && /[一-龥0-9０-９]$/.test(prev)) parts[parts.length - 1] = prev + g;
+    else if (prev && !head && /^[ぁ-ゖー、。」』）！？・]/.test(g) && !/[、。]$/.test(prev)) parts[parts.length - 1] = prev + g;
     else parts.push(g);
   });
   var out = [], cur = '', last = '';
