@@ -9,6 +9,7 @@
 const MODEL = 'claude-sonnet-5-5';
 const MAX_TURNS = 8;          // 本人が話す回数の上限
 const MAX_CHARS = 300;        // 1回に書ける文字数
+const LINE_MAX = 60;          // まとめ1行の文字数
 const DAILY_LIMIT = 400;      // 1日あたりのAI呼び出し回数の上限（使いすぎ防止）
 const CACHE_SEC = 21600;      // 会話を覚えておく時間（6時間）
 const SHEET_NAME = '回答';
@@ -88,10 +89,15 @@ const SYSTEM_PROMPT = `あなたは、鳥取県大山町で行っている「議
 
 const SUMMARY_PROMPT = `以下は、大山町の議会についてのAIインタビューの記録です。回答者の考えを、回答者の言葉づかいを生かして、多くて3行にまとめてください。
 
-- 1行は60字以内。主語は省き、「〜と思う」「〜が大事」のように、回答者自身の言い方にします。
+- 3行には、回答者がいちばん伝えたかったことを選びます。テーマごとに1行ずつ埋める必要はありません。次のものを優先します。
+  ・時間をかけて、くわしく話したこと
+  ・話の途中で考えが変わったところ（説明を聞いて納得した、など）。どう変わったかがわかるように書きます
+  ・深く聞かれた問いへの、最後の具体的な答え
+- 一言だけ触れた話は、くわしく話した話より後回しにします。
+- 1行は必ず60字以内。1行に話を詰め込まず、1行に1つの考えにします。
+- 主語は省き、「〜と思う」「〜が大事」「〜してほしい」のように、回答者自身の言い方にします。
 - 回答者が理由・具体例・場面・数字を話していれば、それを残して、なぜそう考えるのかが伝わるようにします。2文に分けてもかまいません。
 - 答えが短ければ、短い行のままでかまいません。字数を埋めるために言葉を足しません。
-- できれば、定数・なり手と報酬・町政への関心について1行ずつ。報酬について話していれば、その考えをどこかの行に入れます。
 - 話に出なかったテーマは書きません。「〜には触れていない」「〜は語っていない」「〜は話に出なかった」のような、回答者が話さなかったことについての文は、決して書きません。書くことがなければ、その行は空の文字列にします。
 - 回答者が言っていないことは書きません。誇張したり、言い方を強めたりしません。AIの解釈を足しません。
 - 個人がわかる情報や、特定の人の名前は入れません。`;
@@ -204,23 +210,30 @@ function summary_(body) {
   if (state.turns === 0) return { error: 'まだお話を聞けていません。' };
 
   const transcript = state.log.map(function (l) { return l.who + '：' + l.text; }).join('\n');
-  const out = callClaude_(SUMMARY_PROMPT, [{ role: 'user', content: transcript }], SUMMARY_SCHEMA, 600);
+  let out = callClaude_(SUMMARY_PROMPT, [{ role: 'user', content: transcript }], SUMMARY_SCHEMA, 600);
   if (!out) return { error: 'まとめをつくれませんでした。もう一度お試しください。' };
+  // 60字を超えた行があれば、一度だけ作り直してもらう
+  const over = [out.line1, out.line2, out.line3].some(function (s) { return String(s || '').trim().length > LINE_MAX; });
+  if (over) {
+    const retry = callClaude_(SUMMARY_PROMPT, [{ role: 'user', content: transcript +
+      '\n\n（前回のまとめは、60字を超える行がありました。どの行も必ず60字以内にして、作り直してください。）' }], SUMMARY_SCHEMA, 600);
+    if (retry) out = retry;
+  }
   state.done = true;
   save_(body.sid, state);
   // 話していないことについての文（「〜には触れていない」など）は、指示しても出ることがあるので、ここでも取り除く
   const NOT_SAID = /触れていない|触れられていない|語っていない|語られていない|話に出(なかった|ていない)|言及(していない|はない|がない)|述べていない/;
   const lines = [out.line1, out.line2, out.line3]
-    .map(function (s) { return String(s || '').trim(); })
+    .map(function (s) { return fit_(String(s || '').trim()); })
     .filter(function (s) { return s && !NOT_SAID.test(s); });
-  return { lines: lines.length ? lines : [String(out.line1 || '').trim()] };
+  return { lines: lines.length ? lines : [fit_(String(out.line1 || '').trim())] };
 }
 
 function submit_(body) {
   const state = load_(body.sid);
   if (!state) return { error: '時間がたったため、提出できませんでした。はじめからやり直してください。' };
 
-  const lines = (body.lines || []).slice(0, 3).map(function (s) { return clean_(s).slice(0, 70); });
+  const lines = (body.lines || []).slice(0, 3).map(function (s) { return fit_(clean_(s)); });
   const sheet = sheet_();
   sheet.appendRow([
     new Date(),
@@ -333,6 +346,13 @@ function load_(sid) {
 
 function clean_(s) {
   return String(s || '').replace(/[\u0000-\u0009\u000B-\u001F\u007F]/g, '').trim();
+}
+
+// まとめの1行を60字以内にする。字数の途中ではなく、文の切れ目（。）で切る
+function fit_(s) {
+  if (s.length <= LINE_MAX) return s;
+  const cut = s.slice(0, LINE_MAX).lastIndexOf('。');
+  return cut >= 10 ? s.slice(0, cut + 1) : s.slice(0, LINE_MAX - 1) + '…';
 }
 
 const HEADERS = ['日時', 'セッションID', '公開', 'まとめ1', 'まとめ2', 'まとめ3', '回答回数', '聞けたテーマ', '経路', '会話の記録', 'ニックネーム', '絵', '掲載'];
