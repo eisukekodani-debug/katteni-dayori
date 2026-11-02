@@ -29,6 +29,19 @@ const SHIMEKIRI = '2026-11-16';
       <p class="herobtns"><a class="pbtn" href="#riyu">なぜ14人？</a><a class="sbtn" href="#shomei">署名したい</a></p>
     </section>
 
+    <section class="hodo" aria-labelledby="hodo-h">
+      <h2 class="hodo-h" id="hodo-h">活動がメディアで紹介されました</h2>
+      <p class="hodo-media">{MEDIA.map((m) => <span>{m}</span>)}</p>
+      <details class="hodo-more">
+        <summary>記事の見出しと掲載日</summary>
+        <ul class="hodo-list">
+          {HODO.map((h) => (
+            <li><span class="hodo-m">{h.media}<span class="hodo-d">{h.date}</span></span><span class="hodo-t">「{h.title.map((s) => <span class="nw">{s}</span>)}」</span></li>
+          ))}
+        </ul>
+      </details>
+    </section>
+
     <section id="riyu">
       <h2 class="sec">なぜ14人？</h2>
       <figure class="chart">
@@ -104,18 +117,6 @@ const SHIMEKIRI = '2026-11-16';
       <p style="margin:10px 0 0"><a href={u('/line/')}>QRコードとお知らせの内容</a></p>
     </section>
 
-    <section class="hodo" aria-labelledby="hodo-h">
-      <h2 class="hodo-h" id="hodo-h">活動がメディアで紹介されました</h2>
-      <p class="hodo-media">{MEDIA.map((m) => <span>{m}</span>)}</p>
-      <details class="hodo-more">
-        <summary>記事の見出しと掲載日</summary>
-        <ul class="hodo-list">
-          {HODO.map((h) => (
-            <li><span class="hodo-m">{h.media}<span class="hodo-d">{h.date}</span></span><span class="hodo-t">「{h.title.map((s) => <span class="nw">{s}</span>)}」</span></li>
-          ))}
-        </ul>
-      </details>
-    </section>
   </div>
 </Base>
 
