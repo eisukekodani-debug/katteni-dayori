@@ -3,47 +3,64 @@ import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config/site';
 
+// 略歴は町民レポート（2026年11月）とそろえる。大学名・会社名・受賞歴は入れない（本人方針）
 const keireki = [
-  ['1982年', '旧中山町（現・大山町）に生まれる。米子東高校、中央大学を卒業'],
-  ['2006〜14年', '東京の会社に勤め、海外勤務も経験'],
-  ['2014年', '大山町にUターン。地域おこし協力隊として活動'],
-  ['2014〜16年', 'だいせん未来会議に参加。住民参加でつくる町の総合計画「大山町未来づくり10年プラン」の議論に加わる'],
-  ['2016年', 'まちづくり会社「株式会社さんどう」を設立し、代表に就任。大山寺の参道でカフェとホテルを開く'],
-  ['2021年4月', '大山町議会議員選挙で初当選'],
-  ['2023年', '議会広報常任委員長として「議会だより だいせん」の編集長を務める'],
-  ['2024年12月', '大山町議会議員を辞職'],
-  ['2025年4月', '大山町長選挙に立候補し、落選'],
-  ['現在', '自営業者として、地域のさまざまな仕事をお手伝いしている。議員定数を減らすことを求める直接請求の代表者として活動中'],
+  ['1982年', '旧中山町下甲に生まれる'],
+  ['2006年', '東京で会社勤めを始める'],
+  ['2014年', '大山町にUターン。地域おこし協力隊の1期生に'],
+  ['2016年', 'まちづくり会社を設立'],
+  ['2021年', '大山町議会議員（2024年まで）'],
+  ['現在', '公職を離れ、農作業や地域の仕事に携わる'],
 ];
 ---
-<Base title="請求代表者について" description="議員定数を減らすことを求める直接請求の代表者、小谷英介について。この請求をしようと思った理由と経歴。">
-  <article class="wrap">
+<Base title="小谷えいすけ 町民レポート（請求代表者の思い）" description="議員定数を16人から14人に減らす署名を集めている、請求代表者・小谷英介の思い。いちばん恐れているのは、次の町議選が無投票になること。">
+  <article class="wrap report">
     <div class="futasuji" style="margin-top:28px"></div>
-    <h1 class="title">請求代表者について</h1>
-    <div style="display:flex;gap:16px;align-items:center;margin:8px 0 20px">
-      <img class="face" src={u('/kodani.jpg')} alt="小谷英介の写真" width="96" height="96" style="width:96px;height:96px" />
-      <p style="margin:0"><b style="font-size:1.2em">{SITE.operator}</b>（こだに えいすけ）<br />{SITE.operatorTitle}・鳥取県大山町在住</p>
-    </div>
-    <p>大山町議会の議員定数を16人から14人に減らすことを求める、直接請求の代表者です。このサイトも、私が運営しています。</p>
+    <p class="kicker">請求代表者の思い</p>
+    <h1 class="title">小谷えいすけ 町民レポート</h1>
 
-    <h2 class="sec">この請求をしようと思った理由</h2>
-    <p>私が議員だったときにも、議会改革特別委員会で、議員定数について話し合いました。議員へのアンケートでは約半数が削減すべきと答えていましたが、最後の採決では削減に賛成する人が減り、見直しには至りませんでした。自分たちの人数を自分たちで減らす案は、議会の中からは決めにくいものだと実感しました。また、町民の意見を聞いてみたい、という議員の声もありました。</p>
-    <p>いま私は議会を離れ、一人の町民になりました。今度は町民の側から、この提案をしようと決めました。</p>
-    <p>くわしい考えは、<a href={u('/teisu/')}>提案の記事</a>の「私はこう考える」に書いています。</p>
+    <h2 class="report-hl">選挙のない町には、したくない。</h2>
+    <p class="lead"><b>大山町議会の議員の数を16人から14人にする署名を集めています。私がいちばん恐れているのは、次の町議選が無投票になることです。</b></p>
 
-    <h2 class="sec">数だけの問題ではありません</h2>
-    <p>議員の数を減らせば、それで済むわけではありません。大切なのは、議会を担う人、つまり候補者が、地域から生まれてくる流れをどうつくるか。そして、少数派の声も含めて町民の声をどう拾い上げ、議会に届けていくかです。</p>
-    <p>この10年、地域自主組織や、住民が町の総合計画を話し合った「だいせん未来会議」などで町のことを考え、動いてきた人たちの中から、何人もの議員が生まれています。私自身も、だいせん未来会議に参加していた一人です。</p>
-    <p>その流れを、もう一段広げたいと思っています。</p>
-    <p>議会でいま何が話し合われ、何が決まろうとしているのか。町民がそれを知り、自分の考えを持ち、声を届けられる。選挙の日だけでなく、ふだんからそんな機会がある町にしたい。そのための場づくりを、この署名活動が終わったあとも続けていくつもりです。</p>
-    <p>自分たちのまちは、自分たちでつくる。という意識を持つ人が増えれば、今後、人口が減り、予算が減っても、町は存続すると思います。</p>
-    <p>今回の直接請求は、その最初の一歩です。</p>
-    <p>その試みの一つとして、私たち住民の声を集めて町や議会に届ける仕組み「<a href={u('/ai-interview/')}>AIインタビュー</a>」を、試験的に始めています。議会への要望など、議会について思うことを、ぜひ聞かせてください。</p>
+    <figure class="report-photo">
+      <img src={u('/kodani-inekari.jpg')} alt="稲刈りをする小谷英介" width="480" height="592" loading="lazy" />
+      <figcaption>小谷英介（こだに えいすけ）　議員定数削減の署名 請求代表者</figcaption>
+    </figure>
 
-    <h2 class="sec">経歴</h2>
+    <h2 class="sec">次の選挙は、定数割れのおそれ</h2>
+    <p>町の人口は、この14年で約2割減りました（平成24年の17,818人から、今年の14,313人に）。昨年の町議選は、定数16人に対して候補者17人。今の議員は15人で、全員が再び立候補しても、それだけでは定数に届きません。次は出馬しない意向の方もいると聞きます。<mark>無投票になる可能性は、これまでより高くなっていると私は考えています。</mark></p>
+
+    <h2 class="sec">なぜ14人なのか</h2>
+    <p>町議会は平成20年、<mark>「町民千人に対し議員1人」</mark>という基準で定数を減らしました（議会だより第13号）。今の人口14,313人に当てはめれば、14人が妥当だと考えます。</p>
+
+    <h2 class="sec">投票を通じて、町のことを考える</h2>
+    <p>「こんな町にしたい」と一票を入れることは、町を自分たちでつくる第一歩です。選ばれる側も、次の選挙があるからこそ、緊張感を持って取り組みます。<b>だから私は、無投票だけは絶対に避けるべきだと考えています。</b></p>
+
+    <h2 class="sec">議会の中では、決めきれなかった</h2>
+    <p>2023年、定数を話し合う議会の特別委員会で、私は「減らす」に手を挙げました。事前のアンケートでは<mark>議員の約半数が「減らした方がいい」と答えていました</mark>が、採決は4対10で現状維持。維持を選んだ議員からは「もっと町民の声を聞くべきだ」という意見が出ました。</p>
+    <p>いま一人の町民として声を集め、<mark>テレビ中継の入る開かれた議会の場で、もう一度議論してほしい</mark>と思っています。</p>
+
+    <h2 class="sec">14人で、何が変わるのか</h2>
+    <p>正直に言えば、劇的には変わりません。それでも選挙になる見込みは高まり、町の行く先を一票で選ぶ機会が守られます。役場や議会に任せておけば済む時代は終わりました。これからは、<mark>町のことを自分ごととして考える人を増やしたい。</mark>この署名も、そのきっかけの一つにしたいのです。</p>
+
+    <h2 class="sec">よく聞かれる疑問</h2>
+    <dl class="qa">
+      <dt>議員が減ると、少ない声が届かなくなるのでは？</dt>
+      <dd>人数よりも、議員一人ひとりが地域に足を運び、話を聞くかどうかで決まると考えます。</dd>
+      <dt>問題は、議員の数だけではないのでは？</dt>
+      <dd>その通りです。議会のあり方への思いを「AIインタビュー」で集めています。<a href={u('/ai-interview/')}>インタビューに答える</a></dd>
+    </dl>
+
+    <h2 class="sec">略歴</h2>
     <dl class="keireki">
       {keireki.map(([y, t]) => (<><dt>{y}</dt><dd>{t}</dd></>))}
     </dl>
+    <p class="note" style="margin-top:8px">空き家だったお家を借りて、大山口で暮らしています。小学3年生の息子の父です。</p>
+
+    <div class="report-pdf">
+      <a class="btn" href={u('/kodani-report-202611.pdf')}>町民レポートを印刷する（PDF・A4片面）</a>
+      <p class="note">白黒で印刷できます。まわりの方に渡していただけるとうれしいです。</p>
+    </div>
 
     <h2 class="sec">請求代表者のSNS</h2>
     <div class="sns">
@@ -53,3 +70,22 @@ const keireki = [
     <p style="margin-top:14px">ご連絡は、<a href={u('/contact/')}>お問い合わせ</a>からどうぞ。</p>
   </article>
 </Base>
+
+<style>
+  .report .kicker { margin: 18px 0 2px; font-size: 15px; font-weight: 700; color: var(--usuzumi); letter-spacing: .08em; }
+  .report .title { margin-top: 0; }
+  .report-hl { font-family: var(--mincho); font-weight: 800; font-size: calc(var(--base) * 1.7); line-height: 1.35; margin: 18px 0 10px; }
+  .report mark { background: #FFF2A8; color: inherit; padding: .05em 0; }
+  .report-photo { margin: 22px 0 6px; }
+  .report-photo img { display: block; width: 100%; max-width: 360px; height: auto; }
+  .report-photo figcaption { margin-top: 8px; font-size: 15px; color: var(--usuzumi); }
+  .report .qa { margin: 0; }
+  .report .qa dt { font-weight: 700; margin-top: 14px; padding-left: 1.6em; text-indent: -1.6em; }
+  .report .qa dt::before { content: "問　"; font-family: var(--mincho); }
+  .report .qa dd { margin: 6px 0 0; padding-left: 1.6em; text-indent: -1.6em; line-height: 1.8; }
+  .report .qa dd::before { content: "答　"; font-family: var(--mincho); font-weight: 800; }
+  .report .qa dd a { margin-left: .4em; }
+  .report-pdf { margin: 28px 0 8px; padding: 18px; border: 1.5px solid var(--sumi); }
+  .report-pdf .btn { display: block; text-align: center; padding: 14px; background: var(--sumi); color: #fff; font-weight: 700; text-decoration: none; border-radius: 6px; }
+  .report-pdf .note { margin: 10px 0 0; }
+</style>
