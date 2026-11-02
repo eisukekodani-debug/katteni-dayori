@@ -124,12 +124,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <nav class="menu" id="menu" aria-label="メニュー">
     <ul>
       <li><button type="button" class="js-big">文字を大きくする</button></li>
-      <li><a href={u('/#nagare')}>署名から議会までの流れ</a></li>
-      <li><a href={u('/seikyu/')}>署名していただく内容</a></li>
-      <li><a href={u('/teisu/')}>提案の中身（議員定数の記事）</a></li>
-      <li><a href={u('/ai-interview/')}>AIインタビュー</a></li>
-      <li><a href={u('/about/')}>請求代表者について</a></li>
-      <li><a href={u('/line/')}>お知らせを受け取る</a></li>
+      <li><a href={u('/teisu/')}>なぜ14人？（くわしい記事）</a></li>
+      <li><a href={u('/about/')}>代表者の思い</a></li>
+      <li><a href={u('/ai-interview/')}>住民の声（AIインタビュー）</a></li>
+      <li><a href={u('/seikyu/')}>署名する内容（請求書と条例案）</a></li>
+      <li><a href={u('/#shomei')}>署名のしかた</a></li>
       <li><a href={u('/contact/')}>お問い合わせ</a></li>
     </ul>
   </nav>
@@ -155,7 +154,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <div class="futasuji"></div>
     <div class="inner">
       <nav aria-label="フッター">
-        <a href={u('/about/')}>請求代表者について</a>｜<a href={u('/contact/')}>お問い合わせ</a>｜<a href={u('/line/')}>お知らせを受け取る</a>
+        <a href={u('/about/')}>代表者の思い</a>｜<a href={u('/contact/')}>お問い合わせ</a>｜<a href={u('/line/')}>LINEのお知らせ</a>
       </nav>
       <p class="copy ga">このサイトは、閲覧の状況を知るためにGoogleアナリティクスを使っています。個人を特定する情報は集めていません。</p>
       <p class="copy">© 2026 {SITE.name}</p>

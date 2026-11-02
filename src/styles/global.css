@@ -525,3 +525,6 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
   .logo-row { gap: 6px; }
   .logo-place { font-size: 11px; letter-spacing: .02em; }
 }
+
+/* 記事の「私はこう考える」から代表者ページへ */
+.iken-more { padding: 4px 16px 18px; }
