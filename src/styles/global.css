@@ -405,6 +405,8 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 @media (max-width: 1099px) {
   .cta-bar { display: grid; grid-template-columns: 2.3fr 1fr; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
     padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(250,248,243,.97); border-top: 2px solid var(--sumi); }
+  /* iPhoneのSafariで下のツールバーが縮んだとき、帯の下に隙間が出ないよう背景を下へ伸ばす */
+  .cta-bar::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 120px; background: rgb(250,248,243); }
   .cta-bar a { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 56px; border-radius: 6px; text-decoration: none; text-align: center; }
   .cta-bar .cta-line { background: var(--line); color: #fff; box-shadow: 0 2px 0 var(--line-dk); }
   .cta-bar .cta-line b { font: 700 18px/1.25 var(--gothic); }
