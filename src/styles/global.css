@@ -489,7 +489,7 @@ html.big .hbtn.js-big { background: var(--sumi); color: #fff; }
 .hodo-h { font: 700 14px/1.6 var(--gothic); letter-spacing: .1em; color: var(--usuzumi); margin: 0 0 6px; }
 .hodo-media { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 8px; margin: 0 0 10px; }
 .hodo-media span { font-family: var(--mincho); font-weight: 800; font-size: 19px; line-height: 1.5; white-space: nowrap; }
-@media (min-width: 600px) { .hodo-media { grid-template-columns: repeat(4, auto); justify-content: center; gap: 6px 28px; } }
+@media (min-width: 600px) { .hodo-media { grid-template-columns: repeat(5, auto); justify-content: center; gap: 6px 28px; } }
 .hodo-more { text-align: left; border-top: 1px solid var(--kei); }
 .hodo-more summary { cursor: pointer; font-size: 14px; color: var(--usuzumi); padding: 8px 0; text-align: center; }
 .hodo-list { list-style: none; margin: 0 0 8px; padding: 0; }

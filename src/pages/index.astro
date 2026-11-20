@@ -3,44 +3,78 @@ import { u } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config/site';
 
-// 報道（新しいものを上に足す）。リンクは期限切れや会員限定になるため載せない
-// 見出しは改行してよい区切りごとに分ける
+// 報道（新しいまとまりを上に足す）。リンクは期限切れや会員限定になるため載せない
+// 見出しは改行してよい区切りごとに分ける。title がないものは memo を表示する
 const HODO = [
-  { media: '山陰中央新報', date: '10月21日', title: ['議員定数削減', '直接請求へ　', '大山町民有志が', '署名活動'] },
-  { media: '読売新聞', date: '10月21日', title: ['大山町議の定数　', '削減へ', '署名活動'] },
-  { media: 'NHK', date: '10月20日', title: ['鳥取 ', '大山町住民有志が', '議員定数削減を', '求めて', '署名開始'] },
-  { media: '日本海新聞', date: '10月20日', title: ['大山町民有志が', '議員定数2減', '直接請求で', '署名活動'] },
+  {
+    label: '署名の提出',
+    items: [
+      { media: 'NHK', date: '11月18日', memo: ['鳥取放送局の夕方の番組', '「いろ★ドリ」で放送'] },
+      { media: '日本海新聞', date: '11月19日', title: ['議員定数削減を', '求める署名提出'] },
+      { media: '山陰中央新報', date: '11月19日', title: ['町議定数2減求め', '署名提出'] },
+      { media: '読売新聞', date: '11月19日', title: ['大山町議定数減　', '950人分署名提出'] },
+      { media: '毎日新聞', date: '11月19日', title: ['議会定数減求め　', '署名950筆を提出'] },
+    ],
+  },
+  {
+    label: '署名活動の開始',
+    items: [
+      { media: '山陰中央新報', date: '10月21日', title: ['議員定数削減', '直接請求へ　', '大山町民有志が', '署名活動'] },
+      { media: '読売新聞', date: '10月21日', title: ['大山町議の定数　', '削減へ', '署名活動'] },
+      { media: 'NHK', date: '10月20日', title: ['鳥取 ', '大山町住民有志が', '議員定数削減を', '求めて', '署名開始'] },
+      { media: '日本海新聞', date: '10月20日', title: ['大山町民有志が', '議員定数2減', '直接請求で', '署名活動'] },
+    ],
+  },
 ];
 // 媒体名の並び（知られている順）
-const MEDIA = ['NHK', '読売新聞', '山陰中央新報', '日本海新聞'];
-// 署名の締め切り（あと何日かは、見た日に合わせてブラウザで計算する）
-const SHIMEKIRI = '2026-11-16';
+const MEDIA = ['NHK', '読売新聞', '毎日新聞', '山陰中央新報', '日本海新聞'];
 ---
 <Base hideSubtitle>
   <div class="wrap">
-    <section class="hero">
-      <p class="catch"><span class="nw">選挙の日じゃなくても、</span><span class="nw">町は動かせる。</span></p>
-      <div class="heronums" aria-label="大山町議会の議員定数を、いまの16人から14人に">
-        <p class="lbl">大山町議会の議員定数を</p>
-        <p class="row"><span><span class="n">16<small>人</small></span><span class="cap">いまの定数</span></span><span class="arrow" aria-hidden="true">→</span><span><span class="n">14<small>人</small></span><span class="cap">直接請求の案</span></span></p>
+    <section class="hero hokoku">
+      <p class="hk-tag">ご報告<span class="hk-d">11月18日・19日</span></p>
+      <h2 class="hk-h"><span class="nw">980人の署名を、</span><span class="nw">選挙管理委員会に</span><span class="nw">提出しました</span></h2>
+      <div class="hk-nums" aria-label="必要な数248人に対して、980人の署名が集まりました">
+        <p class="row"><span><span class="cap">必要な数</span><span class="n s">248<small>人</small></span></span><span class="arrow" aria-hidden="true">→</span><span><span class="cap">集まった署名</span><span class="n">980<small>人</small></span></span></p>
+        <p class="bai">必要な数の、約4倍</p>
       </div>
-      <p class="now"><b>署名は<span class="nw">11月16日（月）まで</span></b><span class="nokori" id="nokori" data-end={SHIMEKIRI}></span></p>
-      <p class="gaiyo-lead">大山町の町民有志が、町議会の議員定数を<b>16人から14人</b>に減らす条例改正を求めて、署名を集めています。<b>248人以上</b>（有権者の50分の1）の署名が集まると、条例案が議会の正式な議題になります。</p>
-      <p class="herobtns"><a class="pbtn" href="#riyu">なぜ14人？</a><a class="sbtn" href="#shomei">署名したい</a></p>
+      <p>大山町議会の議員定数を<b>16人から14人</b>にする条例改正を求めて、10月17日から1か月間、署名を集めました。</p>
+      <p>署名してくださった皆さん、まわりに声をかけてくださった協力者の皆さん、本当にありがとうございました。</p>
+      <p class="note">有効な署名の数は、これから選挙管理委員会の審査で決まります。</p>
+      <p class="herobtns"><a class="pbtn" href="#nagare">これからの流れ</a><a class="sbtn" href="#riyu">なぜ14人？</a></p>
     </section>
 
     <section class="hodo" aria-labelledby="hodo-h">
-      <h2 class="hodo-h" id="hodo-h">活動がメディアで紹介されました</h2>
+      <h2 class="hodo-h" id="hodo-h">署名の提出が、テレビと新聞で報じられました</h2>
       <p class="hodo-media">{MEDIA.map((m) => <span>{m}</span>)}</p>
       <details class="hodo-more">
-        <summary>記事の見出しと掲載日</summary>
-        <ul class="hodo-list">
-          {HODO.map((h) => (
-            <li><span class="hodo-m">{h.media}<span class="hodo-d">{h.date}</span></span><span class="hodo-t">「{h.title.map((s) => <span class="nw">{s}</span>)}」</span></li>
-          ))}
-        </ul>
+        <summary>報道の見出しと日付</summary>
+        {HODO.map((g) => (
+          <>
+            <p class="hodo-g">{g.label}</p>
+            <ul class="hodo-list">
+              {g.items.map((h) => (
+                <li><span class="hodo-m">{h.media}<span class="hodo-d">{h.date}</span></span>{h.title
+                  ? <span class="hodo-t">「{h.title.map((s) => <span class="nw">{s}</span>)}」</span>
+                  : <span class="hodo-t">{h.memo!.map((s) => <span class="nw">{s}</span>)}</span>}</li>
+              ))}
+            </ul>
+          </>
+        ))}
+        <p class="hodo-note">新聞の署名数（950）は提出した日の集計です。その後、役場の確認を受け、980人となりました。</p>
       </details>
     </section>
+
+    <h2 class="sec" id="nagare">これからの流れ</h2>
+    <ol class="nagare">
+      <li class="done"><span class="who">代表者</span><b>町に申請し、町が告示する</b><span class="when">10月13日・16日</span></li>
+      <li class="done"><span class="who">町民</span><b>署名を集める</b><span class="when"><span class="nw">10月17日（土）</span>〜<span class="nw">11月16日（月）</span>。980人分が集まりました</span></li>
+      <li class="done"><span class="who">代表者</span><b>署名簿を提出する</b><span class="when">11月18日（水）・19日（木）、選挙管理委員会へ</span></li>
+      <li class="now"><b class="nowtag">いま、ここ</b><span class="who">選挙管理委員会</span><b>署名の審査と縦覧</b><span class="when">11月下旬〜12月中旬</span><span class="hl">20日以内に署名を審査して、有効な数を発表します。そのあと7日間、署名簿を誰でも見られるようにします（縦覧）。</span></li>
+      <li><span class="who">代表者</span><b>町長に正式に請求する</b><span class="when">12月中旬〜下旬ごろ。署名簿が戻ってから5日以内</span></li>
+      <li class="gikai"><span class="who">議会</span><b>条例案を審議し、採決する</b><span class="when">12月下旬〜1月ごろ。町長は請求から20日以内に議会を開き、意見を付けて条例案を出します。代表者が議会で意見を述べたうえで、議会が賛否を決めます</span></li>
+    </ol>
+    <p class="note">審査から先の日付は予定です。くわしい手続きは<a href={u('/teisu/')}>記事</a>の「直接請求って何？」に載せています。</p>
 
     <section id="riyu">
       <h2 class="sec">なぜ14人？</h2>
@@ -97,22 +131,9 @@ const SHIMEKIRI = '2026-11-16';
       <p class="note">インタビューは署名ではありません。署名は、紙の署名簿でだけ行います。</p>
     </section>
 
-    <section class="howto" id="shomei">
-      <h2 class="sec">署名のしかた</h2>
-      <p>賛成していただける方は、ご連絡ください。署名は<b><span class="nw">11月16日（月）</span>まで</b>です。</p>
-      <div class="way">
-        <h3>こちらからうかがいます</h3>
-        <p>代表者の{SITE.operator}か、町内の協力者が、ご自宅などへ<span class="nw">うかがいます</span>。お名前と、ご住所（地区）をお知らせください。</p>
-        <p class="btns"><a class="pbtn" href={SITE.lineOaMessageUrl}>LINEで連絡する</a> <a class="sbtn" href={`mailto:${SITE.contactEmail}?subject=${encodeURIComponent('署名を希望します')}`}>メールで連絡する</a></p>
-        <p class="note" style="margin-top:8px">メールは {SITE.contactEmail} あてです。</p>
-      </div>
-      <p>会場での受付も、今後追加していきます。決まりしだい、公式LINEでお知らせします。</p>
-      <p class="note">署名できるのは、大山町の選挙人名簿に登録されている方（町の選挙で投票できる方）です。署名は、ご本人が正式な署名簿に自筆で書きます。署名するのは<a href={u('/seikyu/')}>この請求の要旨と条例案</a>への賛同です。</p>
-    </section>
-
     <section class="kairan">
       <h2>最新情報は、公式LINEで</h2>
-      <p>署名の会場や締め切り、議会での審議の日程と結果を、節目ごとにお知らせします。誰が登録したかは、運営者にもわからない仕組みです。</p>
+      <p>審査の結果や、議会での審議の日程と結果を、節目ごとにお知らせします。誰が登録したかは、運営者にもわからない仕組みです。</p>
       <a class="linebtn" href={SITE.lineUrl} data-line="ページ下">LINEで友だち追加する</a>
       <p style="margin:10px 0 0"><a href={u('/line/')}>QRコードとお知らせの内容</a></p>
     </section>
@@ -120,25 +141,26 @@ const SHIMEKIRI = '2026-11-16';
   </div>
 </Base>
 
-<script is:inline>
-  (function () {
-    var el = document.getElementById('nokori');
-    if (!el) return;
-    // 日本時間の「今日」と締め切り日の差を、日数で数える
-    var p = el.getAttribute('data-end').split('-');
-    var end = Date.UTC(+p[0], +p[1] - 1, +p[2]);
-    var jst = new Date(Date.now() + 9 * 3600000);
-    var today = Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate());
-    var days = Math.round((end - today) / 86400000);
-    if (days > 0) el.textContent = 'あと' + days + '日';
-    else if (days === 0) el.textContent = '今日が最終日';
-    else el.textContent = '署名の受付は終わりました';
-  })();
-</script>
-
 <style>
-  .hero .now .nokori:not(:empty) { display: inline-block; margin-left: 10px; padding: 0 10px; background: var(--sumi); color: #fff; font-weight: 700; border-radius: 3px; }
-  .hero .gaiyo-lead { margin: 14px 0 6px; }
+  .hokoku .hk-tag { margin: 0 0 6px; text-align: center; font: 700 15px/1.6 var(--gothic); letter-spacing: .1em; }
+  .hokoku .hk-tag .hk-d { margin-left: 10px; font-weight: 400; letter-spacing: 0; color: var(--usuzumi); }
+  .hokoku .hk-h { font-family: var(--mincho); font-weight: 800; font-size: min(calc(var(--base) * 1.55), 7vw); line-height: 1.5; text-align: center; margin: 0 0 16px; }
+  .hokoku .hk-h .nw { display: inline-block; white-space: nowrap; }
+  @media (min-width: 768px) { .hokoku .hk-h { font-size: calc(var(--base) * 1.8); } }
+  .hk-nums { background: var(--kiri); border-top: 3px solid var(--sumi); padding: 14px 10px 12px; margin: 0 0 16px; text-align: center; }
+  .hk-nums .row { display: flex; align-items: flex-end; justify-content: center; gap: 14px; margin: 0; font-family: var(--mincho); font-weight: 800; }
+  .hk-nums .cap { display: block; font: 700 14px/1.3 var(--gothic); color: var(--usuzumi); margin-bottom: 4px; }
+  .hk-nums .n { display: block; font-size: 72px; line-height: 1; }
+  .hk-nums .n.s { font-size: 40px; color: var(--usuzumi); }
+  .hk-nums .n small { font-size: 24px; margin-left: 2px; }
+  .hk-nums .n.s small { font-size: 18px; }
+  .hk-nums .arrow { font-size: 28px; color: var(--usuzumi); padding-bottom: 6px; }
+  .hk-nums .bai { margin: 10px 0 0; font-family: var(--mincho); font-weight: 800; font-size: calc(var(--base) * 1.15); }
+  @media (max-width: 420px) { .hk-nums .n { font-size: 60px; } .hk-nums .n.s { font-size: 34px; } }
+  .hodo-media span:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  @media (min-width: 600px) { .hodo-media span:last-child:nth-child(odd) { grid-column: auto; } }
+  .hodo-g { margin: 10px 0 0; font: 700 14px/1.6 var(--gothic); color: var(--usuzumi); }
+  .hodo-note { margin: 4px 0 10px; font-size: 14px; line-height: 1.6; color: var(--usuzumi); }
   .omoi { background: var(--men); border: 2px solid var(--sumi); padding: 18px 16px 20px; margin: 32px 0; }
   .omoi-tag { margin: 0; font-size: 15px; font-weight: 700; color: var(--usuzumi); letter-spacing: .08em; }
   .omoi-h { font-family: var(--mincho); font-weight: 800; font-size: calc(var(--base) * 1.45); line-height: 1.4; margin: 4px 0 14px; }
