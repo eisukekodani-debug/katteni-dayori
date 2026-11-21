@@ -47,6 +47,7 @@ const MEDIA = ['NHK', '読売新聞', '毎日新聞', '山陰中央新報', '日
     <section class="hodo" aria-labelledby="hodo-h">
       <h2 class="hodo-h" id="hodo-h">署名の提出が、テレビと新聞で報じられました</h2>
       <p class="hodo-media">{MEDIA.map((m) => <span>{m}</span>)}</p>
+      <p class="hodo-teisei"><b>報道では「950」となっています。</b>これは代表者の{SITE.operator}の数え間違いで、署名簿1冊分を数え漏らしたまま、950とお伝えしてしまいました。翌日、役場で確認していただき、正しくは980人でした。混乱させてしまい、申し訳ありません。</p>
       <details class="hodo-more">
         <summary>報道の見出しと日付</summary>
         {HODO.map((g) => (
@@ -61,7 +62,6 @@ const MEDIA = ['NHK', '読売新聞', '毎日新聞', '山陰中央新報', '日
             </ul>
           </>
         ))}
-        <p class="hodo-note">新聞の署名数（950）は提出した日の集計です。その後、役場の確認を受け、980人となりました。</p>
       </details>
     </section>
 
@@ -160,7 +160,8 @@ const MEDIA = ['NHK', '読売新聞', '毎日新聞', '山陰中央新報', '日
   .hodo-media span:last-child:nth-child(odd) { grid-column: 1 / -1; }
   @media (min-width: 600px) { .hodo-media span:last-child:nth-child(odd) { grid-column: auto; } }
   .hodo-g { margin: 10px 0 0; font: 700 14px/1.6 var(--gothic); color: var(--usuzumi); }
-  .hodo-note { margin: 4px 0 10px; font-size: 14px; line-height: 1.6; color: var(--usuzumi); }
+  .hodo-teisei { text-align: left; font-size: 16px; line-height: 1.75; background: var(--kiri); padding: 10px 12px; margin: 0 0 12px; }
+  .hodo-teisei b { display: block; }
   .omoi { background: var(--men); border: 2px solid var(--sumi); padding: 18px 16px 20px; margin: 32px 0; }
   .omoi-tag { margin: 0; font-size: 15px; font-weight: 700; color: var(--usuzumi); letter-spacing: .08em; }
   .omoi-h { font-family: var(--mincho); font-weight: 800; font-size: calc(var(--base) * 1.45); line-height: 1.4; margin: 4px 0 14px; }
